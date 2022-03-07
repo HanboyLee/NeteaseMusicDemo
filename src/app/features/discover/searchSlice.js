@@ -3,7 +3,7 @@ import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
 const initialState = {
     currentPane: "songData",
-    loading: true,
+    loading: false,
     total: 0,
     songData: {
         list: [],
