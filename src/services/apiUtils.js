@@ -1,7 +1,7 @@
 import axios from "../services/instance";
 export const apiHandle = ({ url, params }) => {
     return axios({
-        url: `/api${url}`,
+        url: process.env.NODE_ENV === "development" ? "/api" : "",
         params: {
             ...params,
         },
