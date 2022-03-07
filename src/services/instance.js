@@ -30,7 +30,7 @@ const handleResponse = (res) => {
 };
 //Request
 const handleRequest = (config) => {
-    // console.log(config, "handleRequest", 28);
+    console.log(config, "handleRequest", 28);
     nprogress.start();
     return config;
 };
