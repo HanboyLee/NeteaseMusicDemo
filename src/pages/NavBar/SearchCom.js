@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const SearchCom = () => {
     const {
         queryInfo: { keywords },
+        loading,
     } = useSelector((state) => state.search);
     const searchRef = useRef();
     const [query, setQuery] = React.useState(keywords || "");
@@ -22,7 +23,14 @@ const SearchCom = () => {
     };
 
     return (
-        <SearchBar ref={searchRef} size="large" placeholder="输入收寻音乐" onSearch={onSearch} allowClear showCount />
+        <SearchBar
+            loading={loading}
+            ref={searchRef}
+            size="large"
+            placeholder="输入收寻音乐"
+            onSearch={onSearch}
+            allowClear
+        />
     );
 };
 
