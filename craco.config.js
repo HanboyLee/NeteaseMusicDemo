@@ -18,16 +18,16 @@ module.exports = {
         presets: ["@emotion/babel-preset-css-prop"],
     },
 
-    // devServer: {
-    //     proxy: {
-    //         "/api": {
-    //             target: "https://netease-cloud-api-sigma.vercel.app/",
-    //             changeOrigin: true,
-    //             pathRewrite: {
-    //                 // 重写路径: 去掉路径中开头的'/api'
-    //                 "^/api": "",
-    //             },
-    //         },
-    //     },
-    // },
+    devServer: {
+        proxy: {
+            "/api": {
+                target: "https://netease-cloud-api-sigma.vercel.app/",
+                changeOrigin: true,
+                pathRewrite: {
+                    // 重写路径: 去掉路径中开头的'/api'
+                    "^/api": "",
+                },
+            },
+        },
+    },
 };
