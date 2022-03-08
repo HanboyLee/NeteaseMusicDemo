@@ -5,21 +5,26 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SearchCom = () => {
-    const {
-        queryInfo: { keywords },
-        loading,
-    } = useSelector((state) => state.search);
+    const { loading } = useSelector((state) => state.search);
     const searchRef = useRef();
-    const [query, setQuery] = React.useState(keywords || "");
-
     const navigate = useNavigate();
+
     const onSearch = (val, event) => {
         //搜尋資料不能為空
         if (val.trim() === "") {
-            // message.warning("请输入内容!", 1, () => );
             return searchRef.current.focus();
         }
-        navigate(`/search/${val}`);
+        return navigate(`/search/${val}`);
+    };
+
+    const onKeyPress = (e) => {
+        //Enter鍵=13
+        if (e.key === "Enter") {
+            if (e.target.value.trim() === "") {
+                return message.warning("请输入内容!", 1, () => searchRef.current.focus());
+            }
+            navigate(`/search/${e.target.value}`);
+        }
     };
 
     return (
@@ -28,6 +33,7 @@ const SearchCom = () => {
             ref={searchRef}
             size="large"
             placeholder="输入收寻音乐"
+            onKeyPress={onKeyPress}
             onSearch={onSearch}
             allowClear
         />

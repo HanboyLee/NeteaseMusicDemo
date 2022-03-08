@@ -7,7 +7,7 @@ import { ReactComponent as RankingIcon } from "../asset/Icons/rankingIcon.svg";
 const styles = { width: 20, height: 20, verticalAlign: "middle" };
 
 export const links = [
-    { id: uuidv4(), to: "/", title: "众音乐", Icon: <SmileFilled /> },
+    { id: uuidv4(), to: "/", title: "个性音乐", Icon: <SmileFilled /> },
     {
         id: uuidv4(),
         to: "/recommenedSongs",

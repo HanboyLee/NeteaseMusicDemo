@@ -1,18 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setChangeCurrentPage } from "../../app/features/discover/searchSlice";
+
 import MusicTableList from "../../components/MusicTableList";
+import { usePagination } from "./hooks";
 
 const SongsPane = () => {
-    const { songData, loading, queryInfo } = useSelector((state) => state.search);
-    const dispatch = useDispatch();
+    const { songData, loading } = useSelector((state) => state.search);
 
-    const onPagination = (current, pageSize) => {
-        dispatch(setChangeCurrentPage({ offset: current * pageSize, limit: pageSize }));
-    };
-
-    const currentPage = React.useMemo(() => (queryInfo.offset ? queryInfo.offset / 10 : 1), [queryInfo.offset]);
+    const { onPagination, currentPage } = usePagination();
 
     if (loading) {
         return <div>Loading...</div>;

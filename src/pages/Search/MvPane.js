@@ -7,8 +7,8 @@ import VideoImage from "../../components/Image/VideoImage";
 import { usePagination } from "./hooks";
 
 const MvPane = () => {
-    const { loading, mvData, queryInfo } = useSelector((state) => state.search);
-    const onPagination = usePagination();
+    const { loading, mvData } = useSelector((state) => state.search);
+    const { onPagination, currentPage } = usePagination();
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -29,7 +29,7 @@ const MvPane = () => {
                 <Pagination
                     showLessItems
                     onChange={onPagination}
-                    current={queryInfo.offset ? queryInfo.offset / 10 : 1}
+                    current={currentPage}
                     total={mvData.total}
                     showSizeChanger={false}
                 />

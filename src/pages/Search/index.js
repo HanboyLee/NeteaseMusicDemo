@@ -10,9 +10,8 @@ import SongListPane from "./SongListPane";
 import SongsPane from "./SongsPane";
 
 const Search = () => {
-    const [currentPane, setCurrentPane] = React.useState(1);
     const { keywords } = useParams();
-    const { queryInfo, songData, songListData, mvData, navBar, total } = useSelector((state) => state.search);
+    const { queryInfo, navBar, total } = useSelector((state) => state.search);
     const dispatch = useDispatch();
     const renderComs = [
         {
@@ -33,18 +32,17 @@ const Search = () => {
     }, [queryInfo, dispatch, keywords]);
     return (
         <Conatiner>
-            {/* <span>{`搜索“${keywords}”，找到 ${total} 首单曲`}</span> */}
+            <span>{`搜索“${keywords}”，找到 ${total} 首单曲`}</span>
             <Tabs
                 centered
                 animated={{ inkBar: true, tabPane: true }}
-                defaultActiveKey={currentPane}
+                defaultActiveKey={1}
                 type="card"
                 size="large"
                 onChange={(id) => dispatch(setType(Number(id)))}
             >
                 {navBar.map((item, i) => {
                     const { Comp } = renderComs.find((c) => c.id === item.id);
-
                     return (
                         <Tabs.TabPane
                             tab={<div style={{ width: 75, minWidth: 50, textAlign: "center" }}>{item.name}</div>}

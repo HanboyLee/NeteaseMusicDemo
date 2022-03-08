@@ -1,23 +1,20 @@
 import styled from "@emotion/styled/macro";
 import { Menu } from "antd";
-import SubMenu from "antd/lib/menu/SubMenu";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-
-//images
-import { LOGO } from "../../asset/images";
 
 import { themeConstant } from "../../configs/constant";
 import { links } from "../../configs/routers";
 import clsx from "clsx";
 const SiderContiner = () => {
     const { pathname } = useLocation();
-    // console.log(pathname);
     return (
         <Container>
             {/* 導覽到github */}
             <Top>
-                <img loading="lazy" className="img" src={LOGO} alt="" />
+                <Link to={"/"}>
+                    <i className="iconfont icon-wangyiyunyinle"></i>
+                </Link>
             </Top>
 
             <Body>
@@ -55,15 +52,13 @@ const Link = styled(NavLink)`
 `;
 
 const Top = styled.div`
-    width: 50%;
-    overflow: hidden;
-    margin: auto;
-    & .img {
-        border-radius: 50%;
-        padding: 1rem;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    width: 100%;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    & .icon-wangyiyunyinle {
+        color: #f00;
+        font-size: 30px;
     }
 `;
 const Body = styled.div`

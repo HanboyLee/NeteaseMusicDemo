@@ -6,8 +6,8 @@ import ImageCard from "../../components/Image/ImageCard";
 import { usePagination } from "./hooks";
 
 const SongListPane = () => {
-    const { songListData, loading, queryInfo } = useSelector((state) => state.search);
-    const onPagination = usePagination();
+    const { songListData, loading } = useSelector((state) => state.search);
+    const { onPagination, currentPage } = usePagination();
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -31,7 +31,7 @@ const SongListPane = () => {
                 <Pagination
                     showLessItems
                     onChange={onPagination}
-                    current={queryInfo.offset ? queryInfo.offset / 10 : 1}
+                    current={currentPage}
                     total={songListData.total}
                     showSizeChanger={false}
                 />

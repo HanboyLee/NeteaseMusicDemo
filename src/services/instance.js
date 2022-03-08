@@ -21,7 +21,7 @@ const instace = function () {
 
 //Response
 const handleResponse = (res) => {
-    console.log(res, "handleResponse", 23);
+    // console.log(res, "handleResponse", 23);
     if (res.data.code !== 200) {
         message.error("加載資料失敗");
     }
@@ -30,7 +30,7 @@ const handleResponse = (res) => {
 };
 //Request
 const handleRequest = (config) => {
-    console.log(config, "handleRequest", 28);
+    // console.log(config, "handleRequest", 28);
     nprogress.start();
     return config;
 };
