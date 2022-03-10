@@ -58,6 +58,13 @@ export const urlPath = {
 
     // 搜尋
     SEARCH: "/cloudsearch",
+
+    //使用者
+    USER_COUNTRUIES_CODE: "/countries/code/list",
+    USER_SENT_CAPTCHA_CODE: "/captcha/sent",
+    USER_VERIFY: "/captcha/verify",
+    USER_LOGIN: "/login/cellphone",
+    USER_PHONE_CHECK: "/cellphone/existence/check",
 };
 
 export const storageKey = {

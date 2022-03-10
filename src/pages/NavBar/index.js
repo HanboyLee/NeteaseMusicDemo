@@ -4,31 +4,36 @@ import Sider from "antd/lib/layout/Sider";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { themeConstant } from "../../configs/constant";
+import LoginModal from "../Login";
 import PlayerBar from "../PlayerBar";
-import SearchCom from "./SearchCom";
+
 import SiderContiner from "./SiderContiner";
+import TopBarContainer from "./TopBarContainer";
 
 const NavBar = () => {
     return (
-        <Container>
-            {/* 側邊欄 */}
-            <Side>
-                <SiderContiner />
-            </Side>
-            <LayoutContent>
-                {/* 頭部 */}
-                <Top>
-                    <SearchCom />
-                </Top>
-                {/* 中間 */}
-                <Center>
-                    <Outlet />
-                </Center>
-                {/* 底部 */}
-                <Bottom />
-            </LayoutContent>
-            <PlayerBar />
-        </Container>
+        <>
+            <Container>
+                {/* 側邊欄 */}
+                <Side>
+                    <SiderContiner />
+                </Side>
+                <LayoutContent>
+                    {/* 頭部 */}
+                    <Top>
+                        <TopBarContainer />
+                    </Top>
+                    {/* 中間 */}
+                    <Center>
+                        <Outlet />
+                    </Center>
+                    {/* 底部 */}
+                    <Bottom />
+                </LayoutContent>
+                <PlayerBar />
+            </Container>
+            <LoginModal />
+        </>
     );
 };
 

@@ -3,7 +3,7 @@ import "./App.less";
 import "nprogress/nprogress.css";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, useRoutes, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import { ThemeProvider, useTheme } from "@emotion/react";
 import theme from "./configs/themes";
 import zhCN from "antd/lib/locale/zh_CN";
@@ -13,6 +13,7 @@ import NavBar from "./pages/NavBar";
 
 //hooks
 import AudioProvider from "./hooks/AudioHook";
+import UserHook from "./hooks/UserHook";
 
 //pages
 const Home = React.lazy(() => import("./pages/Home"));
@@ -26,6 +27,7 @@ const NewSongs = React.lazy(() => import("./pages/NewSongs"));
 const RecommenedSongs = React.lazy(() => import("./pages/RecommenedSongs"));
 const RecommendDetail = React.lazy(() => import("./pages/RecommenedSongs/RecommendDetail"));
 const Search = React.lazy(() => import("./pages/Search"));
+
 //main
 function AppWrapper() {
     const emtionTheme = useTheme();
@@ -34,11 +36,13 @@ function AppWrapper() {
         <Provider store={store}>
             <ConfigProvider locale={zhCN}>
                 <ThemeProvider theme={{ ...theme, ...emtionTheme }}>
-                    <AudioProvider>
-                        <Router>
-                            <App />
-                        </Router>
-                    </AudioProvider>
+                    <UserHook>
+                        <AudioProvider>
+                            <Router>
+                                <App />
+                            </Router>
+                        </AudioProvider>
+                    </UserHook>
                 </ThemeProvider>
             </ConfigProvider>
         </Provider>

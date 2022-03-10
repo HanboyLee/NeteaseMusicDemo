@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_URL, API_TIMEOUT } from "../configs/config";
 import nprogress from "nprogress";
 import { message } from "antd";
+import { getStorge } from "./storgeHelper";
 
 const instace = function () {
     const createInstance = axios.create({
@@ -21,9 +22,9 @@ const instace = function () {
 
 //Response
 const handleResponse = (res) => {
-    // console.log(res, "handleResponse", 23);
+    console.log(res, "handleResponse", 23);
     if (res.data.code !== 200) {
-        message.error("加載資料失敗");
+        message.error(res?.data?.message || "加載資料失敗", 2);
     }
     nprogress.done();
     return res.data;
@@ -32,6 +33,7 @@ const handleResponse = (res) => {
 const handleRequest = (config) => {
     // console.log(config, "handleRequest", 28);
     nprogress.start();
+    config.headers.Authorization = getStorge({ key: "token" }) || "";
     return config;
 };
 
