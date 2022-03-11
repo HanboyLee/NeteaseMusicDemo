@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecommendSongsDeatil } from "../../../app/features/lasterList/recommendSongSlice";
+
+//components
+import Loading from "../../../components/Loading";
 import MusicTableList from "../../../components/MusicTableList";
 
 const extractIds = ({ ids, current = 0, pageSize = 10 }) => {
@@ -24,7 +27,7 @@ const RecommendList = ({ trackIds }) => {
     }, []);
 
     if (!ids.length || songLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     const onPagination = (current, pageSize) => {

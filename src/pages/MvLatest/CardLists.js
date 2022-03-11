@@ -3,10 +3,11 @@ import { Col, Pagination, Row } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import VideoImage from "../../components/Image/VideoImage";
+import Loading from "../../components/Loading";
 
 const CardLists = ({ datas, loading }) => {
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     return (
         <Row>

@@ -7,12 +7,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecommendDeatil } from "../../../app/features/lasterList/recommendSongSlice";
-import Img from "../../../components/Image/Img";
-import PlayListAllBtn from "../../../components/PlaySong/PlayListAllBtn";
 import { themeConstant } from "../../../configs/constant";
 import { extractPlayCountHandle } from "../../../utils/common";
 
 //Components
+import Img from "../../../components/Image/Img";
+import Loading from "../../../components/Loading";
+import PlayListAllBtn from "../../../components/PlaySong/PlayListAllBtn";
 import RecommendCollect from "./RecommendCollect";
 import RecommendComment from "./RecommendComment";
 import RecommendIntro from "./RecommendIntro";
@@ -32,9 +33,9 @@ const RecommendDetail = () => {
     }, []);
 
     if (detailLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
-    console.log(playDeatail.trackIds, "playDeatail.trackIds");
+
     const tabsDatas = [
         {
             id: 1,

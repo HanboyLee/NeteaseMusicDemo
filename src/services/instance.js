@@ -11,7 +11,7 @@ const instace = function () {
         timeout: API_TIMEOUT,
         responseType: "json",
         params: {
-            cookie: JSON.parse(localStorage.getItem("userInfo") || JSON.stringify({ cookie: "" })).cookie,
+            cookie: JSON.parse(localStorage.getItem("token") || JSON.stringify({ cookie: "" })).cookie,
         },
     });
     createInstance.interceptors.response.use(handleResponse, handleError);
@@ -33,15 +33,15 @@ const handleResponse = (res) => {
 const handleRequest = (config) => {
     // console.log(config, "handleRequest", 28);
     nprogress.start();
-    config.headers.Authorization = getStorge({ key: "token" }) || "";
     return config;
 };
 
 //Error
 const handleError = (error) => {
-    const { response, message } = error;
-    console.log(error);
-    return Promise.reject(response ? new Error(response.data.message || message) : error);
+    const { response, msg } = error;
+    message.error(response.data.msg);
+    nprogress.done();
+    Promise.reject(response ? new Error(response.data.message || msg) : error);
 };
 
 const request = instace();

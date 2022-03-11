@@ -10,7 +10,7 @@ const ImageCard = ({ id, navigateTo, picUrl, name, playCount }) => {
     return (
         <Link replace={true} to={`/${navigateTo}${id}`}>
             <ImageBox>
-                <ImageItem alt="example" src={picUrl} preview={false} />
+                <ImageItem alt="example" src={picUrl + "?param=500y500"} preview={false} />
             </ImageBox>
             <Text>{name}</Text>
             {playCount && (

@@ -4,13 +4,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import VideoImage from "../../components/Image/VideoImage";
+import Loading from "../../components/Loading";
 import { usePagination } from "./hooks";
 
 const MvPane = () => {
     const { loading, mvData } = useSelector((state) => state.search);
     const { onPagination, currentPage } = usePagination();
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     return (
         <>

@@ -8,6 +8,7 @@ import { getRecommendSubscribe } from "../../../app/features/lasterList/recommen
 import { ReactComponent as DoubleSeIcon } from "../../../asset/Icons/doubleSex.svg";
 import { ReactComponent as GirlIcon } from "../../../asset/Icons/girl.svg";
 import { ReactComponent as BoyIcon } from "../../../asset/Icons/boy.svg";
+import Loading from "../../../components/Loading";
 
 //性別對應
 const genderwrap = ({ num }) => {
@@ -28,15 +29,16 @@ const RecommendCollect = ({ songslistId }) => {
         subscribeLoading,
         subscribers: { subscribers },
     } = useSelector((state) => state.recommendSong);
-    console.log(songslistId, "id");
+
     React.useEffect(() => {
         dispatch(getRecommendSubscribe({ id: songslistId, limit: 100 }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (subscribeLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
+
     return (
         <Container>
             {subscribers.map((item) => {

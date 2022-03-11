@@ -1,15 +1,15 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled/macro";
 import { Button, Col, Row, Typography } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { singerDetailAsync } from "../../../app/features/singer/singerDetailSlice";
+import { themeConstant } from "../../../configs/constant";
 
 //components
 import TabContent from "./TabContent";
 import Image from "../../../components/Image/Img";
-import { themeConstant } from "../../../configs/constant";
+import Loading from "../../../components/Loading";
 const SingerItem = (props) => {
     const { singerId } = useParams();
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const SingerItem = (props) => {
         console.log(onCollectToProfile);
     };
     if (loading) {
-        return <div>Loading</div>;
+        return <Loading />;
     }
     return (
         <Container>

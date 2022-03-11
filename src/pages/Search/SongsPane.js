@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Loading from "../../components/Loading";
 
 import MusicTableList from "../../components/MusicTableList";
 import { usePagination } from "./hooks";
@@ -10,7 +11,7 @@ const SongsPane = () => {
     const { onPagination, currentPage } = usePagination();
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     return (
         <MusicTableList

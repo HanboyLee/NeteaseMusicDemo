@@ -63,8 +63,13 @@ export const urlPath = {
     USER_COUNTRUIES_CODE: "/countries/code/list",
     USER_SENT_CAPTCHA_CODE: "/captcha/sent",
     USER_VERIFY: "/captcha/verify",
-    USER_LOGIN: "/login/cellphone",
     USER_PHONE_CHECK: "/cellphone/existence/check",
+    USER_LOGIN: "/login/cellphone",
+    USER_LOGOUT: "/logout",
+    USER_SIGNUP: "/register/cellphone",
+    //使用者登入歌單情況
+    USER_PLAYLIST: "/user/playlist", //我的歌單
+    USER_SUBCOUNT: "/user/subcount", //获取用户信息 , 歌单，收藏，mv, dj 数量
 };
 
 export const storageKey = {

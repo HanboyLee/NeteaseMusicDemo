@@ -3,14 +3,7 @@ import { Button, Col, Input, Row, Select } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin, getCaptcha } from "../../app/features/login/loginSlice";
-import {
-    useAuthCode,
-    useCtcode,
-    useIsVerifyCountBackwards,
-    usePwd,
-    useSwitcher,
-    useUserPhone,
-} from "../../hooks/UserHook";
+import { useAuthCode, useCtcode, useIsVerifyCountBackwards, usePwd, useUserPhone } from "../../hooks/UserHook";
 import Footer from "./Footer";
 import InputPassword from "./InputPassword";
 import InputPhone from "./InputPhone";
@@ -20,8 +13,8 @@ const ContentLogin = ({ children }) => {
     const [authCode, setAuthCode] = useAuthCode();
     const [ctcode] = useCtcode();
     const [userPwd] = usePwd();
-    const [, setSwitcher] = useSwitcher();
-    const { countriesCode, captchaInfo, isVerify } = useSelector((state) => state.login);
+
+    const { isVerify } = useSelector((state) => state.login);
 
     const [mode, setMode] = React.useState(true);
     const checkPwdRef = React.useRef();

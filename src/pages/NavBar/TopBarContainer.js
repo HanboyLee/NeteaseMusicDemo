@@ -15,8 +15,6 @@ const TopBarContainer = () => {
     const [, setShow] = useShowModal();
     const { userInfo } = useSelector((state) => state.login);
     const isLogin = useIsLogin();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     return (
         <Row>
@@ -59,9 +57,7 @@ const ProfileListSelector = () => {
     };
 
     //我的音樂
-    const onMyMusic = () => {
-        navigate("/MyMusic");
-    };
+    const onMyMusic = () => navigate("/myMusic");
 
     return (
         <>

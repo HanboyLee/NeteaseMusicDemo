@@ -3,13 +3,14 @@ import { Col, Pagination, Row } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import ImageCard from "../../components/Image/ImageCard";
+import Loading from "../../components/Loading";
 import { usePagination } from "./hooks";
 
 const SongListPane = () => {
     const { songListData, loading } = useSelector((state) => state.search);
     const { onPagination, currentPage } = usePagination();
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     return (
         <>

@@ -3,6 +3,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getNewSongsList, onClickArea } from "../../app/features/lasterList/newSongsSlice";
+
+//components
+import Loading from "../../components/Loading";
 import MusicTableList from "../../components/MusicTableList";
 import Option from "../../components/Option";
 
@@ -18,7 +21,7 @@ const NewSongs = () => {
         <Container>
             <Option title={"地区"} data={TarBarArea} category={queryInfo.type} onClick={onClickArea} />
 
-            <TableWrap>{loading ? <div>Loading...</div> : <MusicTableList datas={songsList} />}</TableWrap>
+            <TableWrap>{loading ? <Loading /> : <MusicTableList datas={songsList} />}</TableWrap>
         </Container>
     );
 };
@@ -27,6 +30,7 @@ const Container = styled.div`
 `;
 
 const TableWrap = styled.div`
+    width: 100%;
     padding-top: 1rem;
 `;
 

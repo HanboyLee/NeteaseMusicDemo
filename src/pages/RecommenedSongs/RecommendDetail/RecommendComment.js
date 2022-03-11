@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecommentComment, onRecommentPagination } from "../../../app/features/comment/commentSlice";
 import CommentItem from "../../../components/Comment/Comment";
+import Loading from "../../../components/Loading";
 
 const RecommendComment = ({ id }) => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const RecommendComment = ({ id }) => {
     }, [dispatch, recommentQueryInfo, id]);
 
     if (recommentLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     const onPagination = (current) => {

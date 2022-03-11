@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecommendList } from "../../app/features/lasterList/recommendSongSlice";
 import ImageCard from "../../components/Image/ImageCard";
+import Loading from "../../components/Loading";
 
 const Lists = ({ queryInfo }) => {
     const { listLoading, recommendList } = useSelector((state) => state.recommendSong);
@@ -12,8 +13,9 @@ const Lists = ({ queryInfo }) => {
     React.useEffect(() => {
         dispatch(getRecommendList(queryInfo));
     }, [queryInfo, dispatch]);
+
     if (listLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (

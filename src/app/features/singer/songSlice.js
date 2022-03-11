@@ -40,7 +40,7 @@ export const songSlice = createSlice({
             });
             return {
                 ...state,
-                audioLists: action.payload,
+                audioLists: action.payload.filter((item) => item.musicSrc),
             };
         },
         saveInAudioLists(state, action) {

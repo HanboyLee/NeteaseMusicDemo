@@ -3,18 +3,19 @@ import styled from "@emotion/styled/macro";
 import { Button, Col, Input, Row, Select } from "antd";
 import React from "react";
 import { Modal } from "react-overlays";
-import { useShowModal, useSwitcher } from "../../hooks/UserHook";
+import { useInittal, useShowModal, useSwitcher } from "../../hooks/UserHook";
 
 //components
-import Img from "../../components/Image/Img";
 import { themeConstant } from "../../configs/constant";
 
 import ContentDefault from "./ContentDefault";
 import ContentLogin from "./ContentLogin";
 import ContentSignup from "./ContentSignup";
+import ContentVerifyCode from "./ContentVerifyCode";
+import ContentNickName from "./ContentNickName";
 
 const LoginModal = () => {
-    const [show, setShow] = useShowModal();
+    const [show] = useShowModal();
     const [switcher] = useSwitcher();
 
     const renderBackdrop = (props) => <Backdrop {...props} />;
@@ -44,6 +45,18 @@ const SwitcherContent = (switcherNum) => {
                     <Header title={"手机号注册"} />
                 </ContentSignup>
             );
+        case 3:
+            return (
+                <ContentVerifyCode>
+                    <Header title={"手机号注册"} />
+                </ContentVerifyCode>
+            );
+        case 4:
+            return (
+                <ContentNickName>
+                    <Header title={"手机号注册"} />
+                </ContentNickName>
+            );
 
         default:
             return (
@@ -56,10 +69,18 @@ const SwitcherContent = (switcherNum) => {
 
 const Header = ({ title }) => {
     const [, setShow] = useShowModal();
+    const setInittal = useInittal();
     return (
         <Top md={24}>
             <div>{title}</div>
-            <CloseOutlined className="icon" onClick={() => setShow(false)} />
+            <CloseOutlined
+                className="icon"
+                onClick={() => {
+                    //關閉視窗後初始化資料
+                    setInittal();
+                    setShow(false);
+                }}
+            />
         </Top>
     );
 };

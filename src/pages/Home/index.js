@@ -13,6 +13,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useOnSavePlaySong } from "../../hooks/AudioHook";
 import VideoImage from "../../components/Image/VideoImage";
+import Loading from "../../components/Loading";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -22,10 +23,11 @@ const Home = () => {
     );
     React.useEffect(() => {
         dispatch(getPersonalizedList());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     console.log(mv);

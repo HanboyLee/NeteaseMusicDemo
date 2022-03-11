@@ -22,16 +22,14 @@ export const loginSlice = createSlice({
                 userInfo: action.payload.userInfo,
             };
         },
-        userLogout(state, action) {
+        logout(state, action) {
             clearStroge();
             return {
                 ...state,
                 userInfo: {},
             };
         },
-
         setCountrieCode(state, action) {
-            console.log(action.payload);
             return {
                 ...state,
                 countriesCode: action.payload,
@@ -55,7 +53,7 @@ export const loginSlice = createSlice({
     },
 });
 
-export const { setCountrieCode, setHasVerify, userLogin, userLogout } = loginSlice.actions;
+export const { setCountrieCode, setHasVerify, userLogin, logout } = loginSlice.actions;
 
 //獲取國際碼
 export const getCountrieCode =
@@ -78,7 +76,7 @@ export const getCaptcha =
         try {
             // dispatch(onQRCodeLoading(true));
             const datas = await apiHandle({ url: urlPath.USER_SENT_CAPTCHA_CODE, params });
-            console.log(datas, 111);
+            console.log(datas, "getCaptcha");
             if (datas.code === 400) {
                 return;
             }
@@ -90,42 +88,59 @@ export const getCaptcha =
 //檢查手機是否被註冊
 export const checkPhoneHasUsing = async (params = {}) => {
     try {
-        // dispatch(onQRCodeLoading(true));
-        const {
-            datas: { exist },
-        } = await apiHandle({ url: urlPath.USER_PHONE_CHECK, params });
+        const { exist } = await apiHandle({ url: urlPath.USER_PHONE_CHECK, params });
         if (exist !== -1) {
-            message.error("手机已被注册过", 2);
+            return true;
         }
+        return false;
     } catch (error) {
         console.log(error, "checkPhoneHasUsing");
     }
 };
 
-//驗證碼
-const authVerify = async (params) => {
+//驗證碼資料驗證
+export const authVerify = async (params) => {
     try {
         const { data } = await apiHandle({ url: urlPath.USER_VERIFY, params });
-        console.log(data, "authVerify");
+        console.log(data);
         return data;
     } catch (error) {
         message.error(error.message);
+        console.log(error.message);
     }
 };
 
+//登入
 export const authLogin = (params) => async (dispatch) => {
     try {
-        // dispatch(onQRCodeLoading(true));
         const isVerify = params?.methodType ? !!params.methodType : await authVerify(params);
         if (isVerify) {
             delete params.methodType;
-            const { profile: userInfo, token, ...rest } = await apiHandle({ url: urlPath.USER_LOGIN, params });
-            console.log(userInfo, token, rest, "datas");
+            const { profile: userInfo, token } = await apiHandle({ url: urlPath.USER_LOGIN, params });
             dispatch(userLogin({ userInfo, token }));
         }
     } catch (error) {
         console.log(error, "AuthLogin");
     }
+};
+
+//註冊
+export const authSignup = (params) => async (dispatch) => {
+    try {
+        const isVerify = await authVerify(params);
+        if (isVerify) {
+            const { profile: userInfo, token, ...rest } = await apiHandle({ url: urlPath.USER_SIGNUP, params });
+            console.log(userInfo, token, ...rest);
+            dispatch(userLogin({ userInfo, token }));
+        }
+    } catch (e) {
+        message.error(e.message, 2);
+    }
+};
+
+export const userLogout = (params) => async (dispatch) => {
+    await apiHandle({ url: urlPath.USER_LOGOUT });
+    dispatch(logout());
 };
 
 export default loginSlice.reducer;

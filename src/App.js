@@ -14,6 +14,7 @@ import NavBar from "./pages/NavBar";
 //hooks
 import AudioProvider from "./hooks/AudioHook";
 import UserHook from "./hooks/UserHook";
+import Loading from "./components/Loading";
 
 //pages
 const Home = React.lazy(() => import("./pages/Home"));
@@ -27,6 +28,8 @@ const NewSongs = React.lazy(() => import("./pages/NewSongs"));
 const RecommenedSongs = React.lazy(() => import("./pages/RecommenedSongs"));
 const RecommendDetail = React.lazy(() => import("./pages/RecommenedSongs/RecommendDetail"));
 const Search = React.lazy(() => import("./pages/Search"));
+const MyMusic = React.lazy(() => import("./pages/MyMusic"));
+const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
 
 //main
 function AppWrapper() {
@@ -50,7 +53,7 @@ function AppWrapper() {
 }
 
 const Suspense = ({ children }) => {
-    return <React.Suspense fallback={<div>Loading...</div>}>{children}</React.Suspense>;
+    return <React.Suspense fallback={<Loading />}>{children}</React.Suspense>;
 };
 
 const App = () => {
@@ -160,7 +163,23 @@ const App = () => {
                         </Suspense>
                     ),
                 },
+                {
+                    path: "myMusic",
+                    element: (
+                        <Suspense>
+                            <MyMusic />
+                        </Suspense>
+                    ),
+                },
             ],
+        },
+        {
+            path: "*",
+            element: (
+                <Suspense>
+                    <NotFoundPage />
+                </Suspense>
+            ),
         },
     ]);
     return routers;

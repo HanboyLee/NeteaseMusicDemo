@@ -4,6 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getRecommendTags, onClickCat, onCurrentChange } from "../../app/features/lasterList/recommendSongSlice";
+import Loading from "../../components/Loading";
 import Option from "../../components/Option";
 
 import Lists from "./Lists";
@@ -21,7 +22,7 @@ const RecommenedSongs = () => {
         dispatch(onCurrentChange(current));
     };
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (

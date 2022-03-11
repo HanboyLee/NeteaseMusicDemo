@@ -12,6 +12,7 @@ import commentSlice from "./features/comment/commentSlice";
 import personalizedSlice from "./features/discover/personalizedSlice";
 import searchSlice from "./features/discover/searchSlice";
 import loginSlice from "./features/login/loginSlice";
+import userListsSlice from "./features/login/userListsSlice";
 
 export const store = configureStore({
     reducer: {
@@ -27,5 +28,6 @@ export const store = configureStore({
         personalized: personalizedSlice,
         search: searchSlice,
         login: loginSlice,
+        userList: userListsSlice,
     },
 });

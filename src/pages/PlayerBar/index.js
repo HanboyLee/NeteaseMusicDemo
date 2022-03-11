@@ -19,12 +19,11 @@ const PlayerBar = ({ url }) => {
     const onAudioListsChange = (_, list) => {
         //TODO: 移除或搬移都會影響歌單重新載入
         dispatch(updateAudioList(list));
-        audioRef.current.updatePlayIndex(list.length - 1);
+        // audioRef.current.updatePlayIndex(list.length - 1);
     };
 
     return (
         <ReactJkMusicPlayer
-            drag={false}
             autoPlayInitLoadPlayList={true}
             quietUpdate={true}
             clearPriorAudioLists={true}

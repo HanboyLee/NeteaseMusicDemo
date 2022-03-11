@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAlbumList } from "../../app/features/singer/albumSlice";
 import Img from "../../components/Image/Img";
+import Loading from "../../components/Loading";
 import PlayListAllBtn from "../../components/PlaySong/PlayListAllBtn";
 import { useOnSaveSongAllBtn } from "../../hooks/AudioHook";
 import Lists from "./Lists";
@@ -27,7 +28,7 @@ const Album = () => {
     const { albumlists, album, loading } = useSelector((state) => state.album);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     const onFold = () => {

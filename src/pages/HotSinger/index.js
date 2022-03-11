@@ -11,6 +11,7 @@ import { getTopList, getTopPlayListDetail } from "../../app/features/toplist/top
 
 //components
 import Img from "../../components/Image/Img";
+import Loading from "../../components/Loading";
 import MusicTableList from "../../components/MusicTableList";
 import PlayListAllBtn from "../../components/PlaySong/PlayListAllBtn";
 
@@ -28,7 +29,7 @@ const HotSinger = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     const onClick = ({ id }) => {
         dispatch(getTopPlayListDetail({ id }));
