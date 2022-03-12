@@ -10,11 +10,12 @@ const SongsPane = () => {
 
     const { onPagination, currentPage } = usePagination();
 
-    if (loading) {
-        return <Loading />;
-    }
+    // if (loading) {
+    //     return <Loading />;
+    // }
     return (
         <MusicTableList
+            loading={loading}
             paginationOption={{
                 onChange: onPagination || "",
                 total: songData.total || 0,

@@ -21,7 +21,9 @@ const NewSongs = () => {
         <Container>
             <Option title={"地区"} data={TarBarArea} category={queryInfo.type} onClick={onClickArea} />
 
-            <TableWrap>{loading ? <Loading /> : <MusicTableList datas={songsList} />}</TableWrap>
+            <TableWrap>
+                <MusicTableList loading={loading} datas={songsList} />
+            </TableWrap>
         </Container>
     );
 };

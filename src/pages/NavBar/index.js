@@ -66,6 +66,7 @@ const Top = styled(Header)`
 const Center = styled(Content)`
     padding: 1rem;
     width: 100%;
+    height: 100%;
     flex: 1;
 `;
 const Bottom = styled(Footer)`

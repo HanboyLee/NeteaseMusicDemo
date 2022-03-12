@@ -26,9 +26,9 @@ const RecommendList = ({ trackIds }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (!ids.length || songLoading) {
-        return <Loading />;
-    }
+    // if (!ids.length || songLoading) {
+    //     return <Loading />;
+    // }
 
     const onPagination = (current, pageSize) => {
         dispatch(getRecommendSongsDeatil({ ids: extractIds({ ids: trackIds, current: current - 1, pageSize }) }));
@@ -37,6 +37,7 @@ const RecommendList = ({ trackIds }) => {
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <MusicTableList
+                loading={!ids.length || songLoading}
                 datas={songs}
                 paginationOption={{
                     onChange: onPagination || "",

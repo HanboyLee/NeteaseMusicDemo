@@ -1,5 +1,5 @@
 import styled from "@emotion/styled/macro";
-import { Col, Pagination, Row } from "antd";
+import { Col, Row } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import VideoImage from "../../components/Image/VideoImage";

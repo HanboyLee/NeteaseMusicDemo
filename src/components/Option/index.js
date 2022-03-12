@@ -6,11 +6,19 @@ import { Tag } from "antd";
 const Option = ({ Icon, title, data, category, ...rest }) => {
     return (
         <NavBarContainer>
-            <Tag style={{ padding: ".5rem" }}>{title}:</Tag>
+            {title && <Tag style={{ padding: ".5rem" }}>{title}:</Tag>}
             <OptionBox>
-                {data.map((item, i) => {
+                {data.map((item, i, arr) => {
+                    console.log();
                     const isMatch = !!category && (category === item.id || category === item.name || category === item);
-                    return <OptionItem data={item} isMatch={isMatch} key={item.id || i} {...rest} />;
+                    //  最後一欄不出現後綴
+                    const suffix = arr.length - 1 !== i && "|";
+                    return (
+                        <React.Fragment key={item.id || i}>
+                            <OptionItem data={item} isMatch={isMatch} {...rest} />
+                            {suffix}
+                        </React.Fragment>
+                    );
                 })}
             </OptionBox>
         </NavBarContainer>

@@ -97,7 +97,7 @@ const HotSinger = () => {
                     </Col>
                 </Row>
                 <div style={{ width: "100%" }}>
-                    <MusicTableList datas={playlist.tracks} />
+                    <MusicTableList loading={loading} datas={playlist.tracks} />
                 </div>
             </TableContainer>
         </Container>

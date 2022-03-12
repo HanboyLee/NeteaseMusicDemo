@@ -1,6 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
-import { Button, Col, Input, Row, Select } from "antd";
+import { Col } from "antd";
 import React from "react";
 import { Modal } from "react-overlays";
 import { useInittal, useShowModal, useSwitcher } from "../../hooks/UserHook";

@@ -1,13 +1,12 @@
 import { FolderAddOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import { Button } from "antd";
 import React from "react";
-import { useSelector } from "react-redux";
 import { themeConstant } from "../../configs/constant";
 import { useOnSaveSongAllBtn } from "../../hooks/AudioHook";
 
-const PlayListAllBtn = ({ datas, isTooMuch }) => {
-    const onSaveSongAllBtn = useOnSaveSongAllBtn({ isTooMuch });
+const PlayListAllBtn = ({ datas, isTooMuch = false }) => {
+    console.log(isTooMuch, "1........................");
+    const onSaveSongAllBtn = useOnSaveSongAllBtn(isTooMuch);
     return (
         <Container>
             <div className="saveSongAllBtn" onClick={() => onSaveSongAllBtn(datas)}>

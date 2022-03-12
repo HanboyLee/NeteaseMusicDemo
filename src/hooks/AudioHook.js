@@ -35,14 +35,14 @@ export const useAudioInstance = () => [
 ];
 export const useAudioRef = () => React.useContext(Context).audioRef;
 
-export const useOnSaveSongAllBtn = ({ isTooMuch }) => {
+export const useOnSaveSongAllBtn = (isTooMuch) => {
     const dispatch = useDispatch();
+    console.log(isTooMuch, "isTooMuch");
     return async function (songlists) {
         try {
             if (!Array.isArray(songlists)) {
                 throw new Error("獲取歌曲錯誤");
             }
-            console.log(songlists);
             songlists = await Promise.resolve(isTooMuch ? getAllSongsIdsTransforDetails(songlists) : songlists);
             const ids = songlists.map((item) => item.id);
             console.log(songlists);

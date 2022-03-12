@@ -16,17 +16,15 @@ import CardLists from "./CardLists";
 const MvLatest = () => {
     const dispatch = useDispatch();
     const { mvList, TarBar, queryInfo, loading, mvCount } = useSelector((state) => state.mvLatestList);
-    console.log(mvList);
 
     React.useEffect(() => {
-        console.log(queryInfo);
         //初始化
         dispatch(getMvAllList(queryInfo));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [queryInfo]);
     // useSelector((state) => state);
 
-    const onPagination = (current, pageSize) => {
+    const onPagination = (current) => {
         const { limit } = queryInfo;
         dispatch(onCurrentChange({ offset: current * limit }));
         dispatch(onCurrentChangePage({ num: current }));

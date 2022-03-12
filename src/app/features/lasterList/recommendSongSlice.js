@@ -11,11 +11,26 @@ const initialState = {
     subscribeLoading: true,
     //過濾器導覽
     tagbar: [],
+    hotTagbar: [
+        "全部",
+        "粤语",
+        "ACG",
+        "华语",
+        "流行",
+        "欧美",
+        "说唱",
+        "摇滚",
+        "民谣",
+        "电子",
+        "轻音乐",
+        "影视原声",
+        "怀旧",
+    ],
     //列表
     recommendList: [],
     total: 0,
     queryInfo: {
-        cat: "华语",
+        cat: "全部",
         limit: 8,
         num: 1,
     },
@@ -151,8 +166,6 @@ export const getRecommendDeatil = (params) => async (dispatch) => {
     try {
         dispatch(setDetailLoading(true));
         const { playlist } = await apiHandle({ url: urlPath.RECOMMEND_SONG_DETAIL, params });
-        console.log(playlist, "playlist");
-
         dispatch(recommendSongDeatilByAmount(playlist));
     } catch (error) {
         message.error(error.message, (e) => {
@@ -164,9 +177,7 @@ export const getRecommendDeatil = (params) => async (dispatch) => {
 //獲取全部歌單細節
 export const getRecommendSongsDeatil = (params) => async (dispatch) => {
     dispatch(setSongsLoading(true));
-
     const { songs } = await apiHandle({ url: urlPath.TOPLIST_SONG_DETAIL, params });
-
     dispatch(songsByAmount(songs));
 };
 

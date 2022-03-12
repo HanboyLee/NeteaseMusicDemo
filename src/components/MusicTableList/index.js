@@ -4,7 +4,7 @@ import { transforTime } from "../../utils/common";
 import Img from "../Image/Img";
 import PlaySongIcon from "../PlaySong/PlaySongIcon";
 
-const MusicTableList = ({ datas, paginationOption = {} }) => {
+const MusicTableList = ({ loading = false, datas, paginationOption = {} }) => {
     const transforDatas = React.useMemo(
         () =>
             datas?.map((item, i) => {
@@ -22,7 +22,7 @@ const MusicTableList = ({ datas, paginationOption = {} }) => {
     );
     return (
         <Table
-            style={{ width: "100%" }}
+            loading={loading}
             bordered
             position={"buttomCenter"}
             pagination={paginationOption}
