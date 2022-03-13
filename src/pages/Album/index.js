@@ -1,16 +1,18 @@
-import { UpOutlined, DownOutlined, FolderAddOutlined } from "@ant-design/icons";
+import { UpOutlined, DownOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
-import { Button, Tag } from "antd";
+import { Pagination, Tag } from "antd";
 import moment from "moment";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { getComment, setPagination } from "../../app/features/comment/commentSlice";
 import { getAlbumList } from "../../app/features/singer/albumSlice";
+import CommentContent from "../../components/Comment/CommentContent";
 import Img from "../../components/Image/Img";
 import Loading from "../../components/Loading";
 import PlayListAllBtn from "../../components/PlaySong/PlayListAllBtn";
-import { useOnSaveSongAllBtn } from "../../hooks/AudioHook";
+import { urlPath } from "../../configs/constant";
 import Lists from "./Lists";
 
 const Album = () => {
@@ -18,14 +20,22 @@ const Album = () => {
     const { albumId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const onSaveSongAllBtn = useOnSaveSongAllBtn();
+
+    const { commentList, loading: commentLoading, queryInfo, refreshComment } = useSelector((state) => state.comment);
+    const { albumlists, album, loading } = useSelector((state) => state.album);
+
     const [fold, setFold] = React.useState(false);
+
     React.useEffect(() => {
         if (albumId) dispatch(getAlbumList({ id: albumId }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { albumlists, album, loading } = useSelector((state) => state.album);
+    React.useEffect(() => {
+        dispatch(
+            getComment({ id: albumId, offset: queryInfo.offset, timestamp: refreshComment }, urlPath.ALBUM_COMMENT)
+        );
+    }, [dispatch, queryInfo, albumId, refreshComment]);
 
     if (loading) {
         return <Loading />;
@@ -43,6 +53,7 @@ const Album = () => {
             textRef.current.textContent = album.description;
         }
     };
+
     const text = (str) => {
         const textlen = str.length > 1000;
         if (textlen) {
@@ -53,6 +64,11 @@ const Album = () => {
     };
 
     const onNavigate = () => navigate(`/singer/${album.artist.id}`);
+
+    //討論區分頁
+    const onPagination = (current) => {
+        dispatch(setPagination({ num: current, offset: (current - 1) * 20 }));
+    };
 
     return (
         <Container>
@@ -112,10 +128,30 @@ const Album = () => {
                     </div>
                 )}
             </div>
+            {/* 歌曲列表 */}
             <Lists datas={albumlists} />
+            {/* 討論區 */}
+            {!commentLoading && (
+                <CommentWrap>
+                    <CommentContent id={albumId} t={1} type={3} datas={commentList}>
+                        <Pagination
+                            style={{ textAlign: "center" }}
+                            showLessItems
+                            onChange={onPagination}
+                            current={queryInfo.num}
+                            total={commentList.total}
+                            showSizeChanger={false}
+                            pageSize={20}
+                        />
+                    </CommentContent>
+                </CommentWrap>
+            )}
         </Container>
     );
 };
+const CommentWrap = styled.div`
+    margin-top: 3rem;
+`;
 
 const Container = styled.div`
     padding: 1rem 0;

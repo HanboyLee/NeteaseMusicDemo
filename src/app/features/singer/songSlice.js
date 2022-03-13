@@ -1,5 +1,5 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { message } from "antd";
+import { createSlice } from "@reduxjs/toolkit";
+import { message, notification } from "antd";
 import { storageKey, urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
 import { setStorge } from "../../../services/storgeHelper";
@@ -40,7 +40,7 @@ export const songSlice = createSlice({
             });
             return {
                 ...state,
-                audioLists: action.payload.filter((item) => item.musicSrc),
+                audioLists: action.payload,
             };
         },
         saveInAudioLists(state, action) {
@@ -72,6 +72,11 @@ export const getSong = (param, songInfo) => async (dispatch) => {
             apiHandle({ url: urlPath.SONG_URL, params }),
             apiHandle({ url: urlPath.SONG_LYRIC, params }),
         ]);
+        notification.info({
+            duration: 2,
+            message: songInfo.name,
+            description: "加入歌曲列表中",
+        });
         dispatch(getSongByAmount(transSongs({ songUrl: data[Object.keys(data)], songInfo, songLrc })));
     } catch (error) {
         console.log(error, "getSong");
@@ -80,7 +85,6 @@ export const getSong = (param, songInfo) => async (dispatch) => {
 export const getSongs = (param, songInfo) => async (dispatch) => {
     try {
         message.loading("正在为您添加歌曲");
-
         const params = {
             id: param.id.join(","),
             realIP: "116.25.146.177",
@@ -114,8 +118,11 @@ export const getSongs = (param, songInfo) => async (dispatch) => {
         }
 
         // 過濾沒有地址的音樂資料
-        const datas = transSongs(newMap);
-        message.success("添加成功");
+        const datas = transSongs(newMap).filter((item) => item.musicSrc);
+        notification.info({
+            duration: 2,
+            message: `${datas.length} 首已加入列表中`,
+        });
         dispatch(setSongsByAmount(datas));
     } catch (error) {
         console.log(error, "getSong");

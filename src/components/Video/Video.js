@@ -1,9 +1,7 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
 import React from "react";
-import LoadingImg from "../../asset/images/Loading.gif";
-import { useAudioRef, useAudioInstance } from "../../hooks/AudioHook";
-import Img from "../Image/Img";
+import { useAudioRef } from "../../hooks/AudioHook";
 
 const Video = ({ loading, videoSrc, imgSrc }) => {
     const videoWrapRef = React.useRef();
@@ -15,7 +13,7 @@ const Video = ({ loading, videoSrc, imgSrc }) => {
     return (
         <Container ref={videoWrapRef}>
             {loading ? (
-                <LoadingOutlined style={{ fontSize: videoWrapRef.current?.offsetHeight || 0 }} />
+                <LoadingOutlined style={{ fontSize: 400 }} />
             ) : (
                 <video
                     controlsList={"nodownload"}

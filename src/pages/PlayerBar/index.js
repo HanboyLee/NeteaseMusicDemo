@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import { updateAudioList } from "../../app/features/singer/songSlice";
-import { getStorge } from "../../services/storgeHelper";
-import { storageKey } from "../../configs/constant";
+
 import { useAudioRef } from "../../hooks/AudioHook";
 const PlayerBar = ({ url }) => {
     const { audioLists } = useSelector((state) => state.song);

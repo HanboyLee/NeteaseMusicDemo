@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "@emotion/styled/macro";
-import clsx from "clsx";
 import { Row, Pagination, Col } from "antd";
 
 //actions
@@ -24,7 +23,6 @@ import { transforArr } from "./utils";
 const Singer = () => {
     const singer = useSelector((state) => state.singer);
     const dispatch = useDispatch();
-    console.log(singer);
     //初始化 & 更新
     React.useEffect(() => {
         dispatch(singerAsync(singer.queryInfo));

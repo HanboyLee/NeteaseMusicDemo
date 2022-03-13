@@ -14,7 +14,7 @@ const CardLists = ({ datas, loading }) => {
             {datas.map((item) => {
                 return (
                     <MVWrap key={item.id} md={6}>
-                        <LinkItem to={`/singerPlayer/${item.id}`}>
+                        <LinkItem to={`/mvPlayer/${item.id}`}>
                             <VideoImage {...item} />
                         </LinkItem>
                     </MVWrap>

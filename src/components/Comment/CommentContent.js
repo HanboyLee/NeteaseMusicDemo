@@ -2,16 +2,23 @@ import styled from "@emotion/styled/macro";
 import { Divider, Typography } from "antd";
 import React from "react";
 import Comment from "./Comment";
+import InputComment from "./InputComment";
 
-const CommentContent = ({ commentSet }) => {
+const CommentContent = ({ datas, children, ...props }) => {
     return (
         <Container>
-            {/* 熱門 */}
-            <Typography.Title level={5}>熱門評論</Typography.Title>
-            {CommentWrap(commentSet.hotComments)}
+            <InputComment {...props} />
             {/* 一般評論 */}
-            <Typography.Title level={5}>最新评论({commentSet.comments.length})</Typography.Title>
-            {CommentWrap(commentSet.comments)}
+            <Typography.Title level={5}>最新评论({datas?.comments?.length})</Typography.Title>
+            {CommentWrap(datas?.comments)}
+            {children}
+            {/* 熱門 */}
+            {datas?.hotComments?.length && (
+                <>
+                    <Typography.Title level={5}>熱門評論</Typography.Title>
+                    {CommentWrap(datas?.hotComments)}
+                </>
+            )}
         </Container>
     );
 };
@@ -20,7 +27,7 @@ const CommentWrap = (datas) => {
     return (
         <div style={{ padding: "0 1rem" }}>
             <Divider />
-            {datas.map((item) => {
+            {datas?.map((item) => {
                 if (!item.beReplied.length) {
                     return <Comment key={item.commentId} {...item} />;
                 }

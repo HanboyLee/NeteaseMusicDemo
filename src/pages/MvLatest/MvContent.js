@@ -1,34 +1,47 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
-import { Typography } from "antd";
+import { Pagination, Typography } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { getComment, setPagination } from "../../app/features/comment/commentSlice";
 
 import { getSingerMv } from "../../app/features/singer/singerDetailSlice";
-import CommentContent from "../Comment/CommentContent";
-import VideoImage from "../Image/VideoImage";
-import Video from "./Video";
+import { urlPath } from "../../configs/constant";
+import CommentContent from "../../components/Comment/CommentContent";
+import VideoImage from "../../components/Image/VideoImage";
+import Video from "../../components/Video/Video";
 
-const ViedoContent = () => {
-    const { singerId } = useParams();
+const MvContent = () => {
+    const { mvId } = useParams();
     const continerRef = React.useRef();
     const dispatch = useDispatch();
     const { currentMv, loading } = useSelector((state) => state.singerDetail || "");
+
+    const { commentList, loading: commentLoading, queryInfo, refreshComment } = useSelector((state) => state.comment);
+
     React.useEffect(() => {
-        if (singerId) {
-            dispatch(getSingerMv([{ mvid: singerId }, { id: singerId }]));
+        if (mvId) {
+            dispatch(getSingerMv([{ mvid: mvId }, { id: mvId }]));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [singerId]);
-    const [mvDetailSet, commentSet, urlSet, mvRelated] = React.useMemo(() => currentMv || [], [currentMv]);
+    }, [mvId]);
+
+    React.useEffect(() => {
+        dispatch(getComment({ id: mvId, offset: queryInfo.offset, timestamp: refreshComment }, urlPath.MV_COMMENT));
+    }, [dispatch, queryInfo, mvId, refreshComment]);
+
+    const [mvDetailSet, urlSet, mvRelated] = React.useMemo(() => currentMv || [], [currentMv]);
 
     if (!currentMv.length) {
         return <LoadingOutlined style={{ fontSize: continerRef.current?.offsetHeight || 0 }} />;
     }
 
-    // console.log(mvDetailSet, commentSet, urlSet, mvRelated);
+    //評論分頁
+    const onPagination = (current) => {
+        dispatch(setPagination({ num: current, offset: (current - 1) * 20 }));
+    };
 
     return (
         <Contianer ref={continerRef}>
@@ -50,17 +63,30 @@ const ViedoContent = () => {
                         <span>{mvDetailSet.desc}</span>
                     </div>
                 </MvInfoWrap>
-                <CommentContent commentSet={commentSet} />
+                {/* 評論區 */}
+                {!commentLoading && (
+                    <CommentContent t={1} type={1} datas={commentList}>
+                        <Pagination
+                            style={{ textAlign: "center" }}
+                            showLessItems
+                            onChange={onPagination}
+                            current={queryInfo.num}
+                            total={commentList.total}
+                            showSizeChanger={false}
+                            pageSize={20}
+                        />
+                    </CommentContent>
+                )}
             </div>
+            {/* 側邊欄相關ＭＶ */}
             <div style={{ flex: 1, width: "20%" }}>
                 <Typography.Title style={{ textAlign: "center" }} level={4}>
                     相关MV
                 </Typography.Title>
-
                 {mvRelated.map((item) => {
                     return (
                         <RelatedMVWrap key={item.id}>
-                            <LinkItem to={`/singerPlayer/${item.id}`}>
+                            <LinkItem to={`/mvPlayer/${item.id}`}>
                                 <VideoImage {...item} />
                             </LinkItem>
                         </RelatedMVWrap>
@@ -96,4 +122,4 @@ const PushTime = styled.div`
     display: inline-block;
 `;
 
-export default ViedoContent;
+export default MvContent;

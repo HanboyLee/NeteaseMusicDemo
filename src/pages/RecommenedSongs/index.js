@@ -1,6 +1,6 @@
 import { CaretDownOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
-import { Divider, Pagination, Drawer, Button, Typography, Row } from "antd";
+import { Divider, Pagination, Drawer, Button, Typography } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -26,14 +26,12 @@ const RecommenedSongs = () => {
     if (loading) {
         return <Loading />;
     }
-    console.log(hotTagbar);
     return (
         <Container>
             {/* 導覽 */}
-
             <TagsWrap>
                 <Tags>
-                    <Typography.Title className="title" type="success" level={4}>
+                    <Typography.Title className="title" type="danger" level={4}>
                         全部
                     </Typography.Title>
                     <Button onClick={() => setOpenDrawer((prev) => !prev)}>

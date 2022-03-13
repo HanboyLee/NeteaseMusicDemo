@@ -26,7 +26,7 @@ export const urlPath = {
     SIMI: "/simi/artist",
     //MV
     MV_PROFILE: "/mv/detail",
-    MV_COMMENT: "comment/mv",
+
     MV_URL: "mv/url",
     MV_RELATED: "/simi/mv",
     ALBUMLISTS: "/album",
@@ -47,12 +47,11 @@ export const urlPath = {
     RECOMMEND_SONG_TAG: "/playlist/catlist", //標籤
     RECOMMEND_SONG_LIST: "/top/playlist/highquality", //列表
     RECOMMEND_SONG_DETAIL: "/playlist/detail", //列表詳情
-    RECOMMEND_COMMENT: "/comment/playlist", //歌單評論
     RECOMMEND_SUBSCRIBE: "/playlist/subscribers", //歌單收藏者
     //首頁
     HOME_BANNER: "/banner",
     HOME_PERSONALIZED: "/personalized?limit=12", //推荐歌单
-    HOME_NEWSONG: "/personalized/newsong?limit=20", // 推荐新音乐
+    HOME_NEWSONG: "/personalized/newsong?limit=10", // 推荐新音乐
     HOME_PRIVATECONTENT: "/personalized/privatecontent", //獨家放送
     HOME_MV: "/personalized/mv", //推薦ＭＶ
 
@@ -70,6 +69,12 @@ export const urlPath = {
     //使用者登入歌單情況
     USER_PLAYLIST: "/user/playlist", //我的歌單
     USER_SUBCOUNT: "/user/subcount", //获取用户信息 , 歌单，收藏，mv, dj 数量
+
+    //評論
+    USER_SET_COMMENT: "/comment", // 發送/回覆
+    RECOMMEND_COMMENT: "/comment/playlist", //歌單評論
+    MV_COMMENT: "comment/mv", //MV評論
+    ALBUM_COMMENT: "/comment/album", //專輯評論
 };
 
 export const storageKey = {

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled/macro";
 import { Col, Row, Typography } from "antd";
-import React, { useCallback } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getMyPlayList } from "../../app/features/login/userListsSlice";

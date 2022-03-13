@@ -9,7 +9,6 @@ const Option = ({ Icon, title, data, category, ...rest }) => {
             {title && <Tag style={{ padding: ".5rem" }}>{title}:</Tag>}
             <OptionBox>
                 {data.map((item, i, arr) => {
-                    console.log();
                     const isMatch = !!category && (category === item.id || category === item.name || category === item);
                     //  最後一欄不出現後綴
                     const suffix = arr.length - 1 !== i && "|";

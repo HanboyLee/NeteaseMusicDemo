@@ -23,7 +23,7 @@ const Lists = ({ queryInfo }) => {
             <Row gutter={20}>
                 {recommendList.map((item) => {
                     return (
-                        <ImageWrap md={6} key={item.id}>
+                        <ImageWrap md={4} key={item.id}>
                             <ImageCard
                                 navigateTo={"recommenedSongs/"}
                                 id={item.id}

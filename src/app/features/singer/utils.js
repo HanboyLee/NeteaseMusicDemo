@@ -8,7 +8,6 @@ export const transSongs = (datas) => {
         });
         return newSongs;
     }
-    console.log(datas, "datas");
     return extractSong(datas);
 };
 

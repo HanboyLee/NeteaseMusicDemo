@@ -2,7 +2,7 @@ import React from "react";
 import { Comment, Avatar } from "antd";
 import { ReactComponent as GoodIcon } from "../../asset/Icons/good.svg";
 import styled from "@emotion/styled/macro";
-const CommentItem = ({ children, user, content, timeStr, likedCount }) => {
+const CommentItem = ({ children, user, content, timeStr, likedCount, ...rest }) => {
     return (
         <Comment
             author={<div>{user?.nickname}</div>}

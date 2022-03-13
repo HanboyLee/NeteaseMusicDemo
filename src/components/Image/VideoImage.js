@@ -6,7 +6,7 @@ import { FieldTimeOutlined, PlayCircleOutlined, EyeOutlined } from "@ant-design/
 import { themeConstant } from "../../configs/constant";
 import { extractPlayCountHandle } from "../../utils/common";
 
-const VideoImage = ({ vid, imgurl, cover, name, title, playCount, duration, durationms }) => {
+const VideoImage = ({ vid, imgurl, cover, name, title, playCount, duration, durationms, artistName }) => {
     //時間處理
     const dur = React.useMemo(() => Moment(duration || durationms).format("mm:ss"), [duration, durationms]);
 
@@ -33,6 +33,11 @@ const VideoImage = ({ vid, imgurl, cover, name, title, playCount, duration, dura
             <ImgName strong={true} ellipsis={true}>
                 {name || title}
             </ImgName>
+            {artistName && (
+                <ImgName className="artistName" strong={true} ellipsis={true}>
+                    {artistName}
+                </ImgName>
+            )}
         </>
     );
 };
@@ -42,6 +47,9 @@ const ImgName = styled(Typography.Text)`
     width: 100%;
     text-align: center;
     font-size: 1.1rem;
+    &.artistName {
+        color: #999;
+    }
 `;
 const VideoImgBox = styled.div`
     height: 150px;

@@ -2,7 +2,6 @@ import React from "react";
 import { Tabs } from "antd";
 import TabBox from "./TabBox";
 import styled from "@emotion/styled/macro";
-import { css } from "@emotion/react";
 import { themeConstant } from "../../../configs/constant";
 
 //tabContent

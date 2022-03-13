@@ -19,7 +19,7 @@ const MvPane = () => {
                 {mvData.list.map((item) => {
                     return (
                         <Col md={6} key={item.id}>
-                            <Link to={`/singerPlayer/${item.id}`}>
+                            <Link to={`/mvPlayer/${item.id}`}>
                                 <VideoImage key={item.id} {...item} />
                             </Link>
                         </Col>

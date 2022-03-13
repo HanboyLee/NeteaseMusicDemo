@@ -1,56 +1,69 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import { storageKey, urlPath } from "../../../configs/constant";
+import { createSlice } from "@reduxjs/toolkit";
+import { message } from "antd";
+
+import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
-import { setStorge } from "../../../services/storgeHelper";
+
 const initialState = {
-    recommentLoading: true,
-    recommentComment: {},
-    recommentQueryInfo: {
+    loading: true,
+    commentList: {},
+    queryInfo: {
         num: 1,
         offset: 0,
     },
+    refreshComment: 0,
 };
 
 export const commentSlice = createSlice({
     name: "comment",
     initialState,
     reducers: {
-        recommentByAmount(state, action) {
+        commentByAmount(state, action) {
             return {
                 ...state,
-                recommentComment: action.payload,
-                recommentLoading: false,
+                commentList: action.payload,
+                loading: false,
             };
         },
-        onRecommentLoading(state, action) {
-            return { ...state, recommentLoading: action.payload };
+        onCommentLoading(state, action) {
+            return { ...state, loading: action.payload };
         },
-        onRecommentPagination(state, action) {
-            console.log(action.payload.offset);
+        setPagination(state, action) {
             return {
                 ...state,
-                recommentQueryInfo: {
+                queryInfo: {
                     num: action.payload.num,
                     offset: action.payload.offset,
                 },
             };
         },
+        onPostCommenttimestamp(state, action) {
+            return {
+                ...state,
+                refreshComment: action.payload,
+            };
+        },
     },
 });
 
-export const { recommentByAmount, onRecommentLoading, onRecommentPagination } = commentSlice.actions;
+export const { commentByAmount, onCommentLoading, setPagination, onPostCommenttimestamp } = commentSlice.actions;
 
-export const getRecommentComment =
-    (params = {}) =>
+export const getComment =
+    (params = {}, urlPath) =>
     async (dispatch) => {
         try {
-            dispatch(onRecommentLoading(true));
-            const data = await apiHandle({ url: urlPath.RECOMMEND_COMMENT, params });
-            dispatch(recommentByAmount(data));
+            dispatch(onCommentLoading(true));
+            const data = await apiHandle({ url: urlPath, params });
+            dispatch(commentByAmount(data));
         } catch (error) {
             console.log(error, "getRecomment");
         }
     };
+
+export const postComment = (params) => async (dispatch) => {
+    const { comment } = await apiHandle({ url: urlPath.USER_SET_COMMENT, params });
+    message.info("评论发送成功");
+    dispatch(onPostCommenttimestamp(comment.time));
+};
 
 export default commentSlice.reducer;

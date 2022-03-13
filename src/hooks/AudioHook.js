@@ -10,14 +10,12 @@ const Context = React.createContext();
 const AudioHook = ({ children }) => {
     const audioRef = React.useRef();
 
-    // const dispatch = useDispatch();
     // const [initSong, setInitSong] = React.useState({});
     const [audioInstance, setAudioInstance] = React.useState(null);
 
     //初始化;
     React.useEffect(() => {
         const initSognData = getStorge({ key: storageKey.TRACK_QUEUE_SONG });
-        console.log(111);
         // console.log(initSognData, "initSognData");
         //過濾是否有相同音樂資料
         // dispatch(saveInAudioLists(initSognData));
@@ -35,9 +33,10 @@ export const useAudioInstance = () => [
 ];
 export const useAudioRef = () => React.useContext(Context).audioRef;
 
+//播放全部
 export const useOnSaveSongAllBtn = (isTooMuch) => {
     const dispatch = useDispatch();
-    console.log(isTooMuch, "isTooMuch");
+
     return async function (songlists) {
         try {
             if (!Array.isArray(songlists)) {
@@ -45,14 +44,13 @@ export const useOnSaveSongAllBtn = (isTooMuch) => {
             }
             songlists = await Promise.resolve(isTooMuch ? getAllSongsIdsTransforDetails(songlists) : songlists);
             const ids = songlists.map((item) => item.id);
-            console.log(songlists);
             //如果已經存在列表中就不添加
             // for (const item of audioLists) {
             //     if (ids.some((id) => id === item.id)) {
             //         return message.warning("歌曲已存在列表中");
             //     }
             // }
-            console.log(ids, "ids");
+            // message.info("");
             dispatch(getSongs({ id: ids }, songlists));
         } catch (error) {
             message.error(error.message);
@@ -60,6 +58,7 @@ export const useOnSaveSongAllBtn = (isTooMuch) => {
     };
 };
 
+//單曲播放
 export const useOnSavePlaySong = () => {
     const dispatch = useDispatch();
     const { audioLists } = useSelector((state) => state.song);

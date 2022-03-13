@@ -21,14 +21,11 @@ const ContentVerifyCode = ({ children }) => {
     };
 
     const onSecurityCode = async () => {
-        console.log(userPhone, authCode, "authCode");
-        // const isSuccess = true;
         const isSuccess = await authVerify({
             ctcode,
             phone: userPhone,
             captcha: Number(authCode),
         });
-        console.log(isSuccess, "onSecurityCode");
         //進入ContentNickName
         if (isSuccess) {
             setSwitcher(4);

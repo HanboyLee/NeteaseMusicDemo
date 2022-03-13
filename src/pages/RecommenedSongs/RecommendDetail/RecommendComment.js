@@ -1,58 +1,40 @@
-import { Divider, Pagination } from "antd";
+import { Pagination } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecommentComment, onRecommentPagination } from "../../../app/features/comment/commentSlice";
-import CommentItem from "../../../components/Comment/Comment";
-import Loading from "../../../components/Loading";
+import { getComment, setPagination } from "../../../app/features/comment/commentSlice";
+import CommentContent from "../../../components/Comment/CommentContent";
+
+import { urlPath } from "../../../configs/constant";
 
 const RecommendComment = ({ id }) => {
     const dispatch = useDispatch();
-    const { recommentComment, recommentLoading, recommentQueryInfo } = useSelector((state) => state.comment);
-    React.useEffect(() => {
-        dispatch(getRecommentComment({ id, offset: recommentQueryInfo.offset }));
-    }, [dispatch, recommentQueryInfo, id]);
+    const { commentList, loading, queryInfo, refreshComment } = useSelector((state) => state.comment);
 
-    if (recommentLoading) {
-        return <Loading />;
-    }
+    React.useEffect(() => {
+        dispatch(getComment({ id, offset: queryInfo.offset, timestamp: refreshComment }, urlPath.RECOMMEND_COMMENT));
+    }, [dispatch, queryInfo, id, refreshComment]);
 
     const onPagination = (current) => {
-        dispatch(onRecommentPagination({ num: current, offset: (current - 1) * 20 }));
+        dispatch(setPagination({ num: current, offset: (current - 1) * 20 }));
     };
     return (
         <div>
             {/* 評論 */}
-            <CommentWrap datas={recommentComment.comments} />
-            <Pagination
-                style={{ textAlign: "center" }}
-                showLessItems
-                onChange={onPagination}
-                current={recommentQueryInfo.num}
-                total={recommentComment.total}
-                showSizeChanger={false}
-                pageSize={20}
-            />
+            {!loading && (
+                <CommentContent id={id} t={1} type={2} datas={commentList}>
+                    <Pagination
+                        style={{ textAlign: "center" }}
+                        showLessItems
+                        onChange={onPagination}
+                        current={queryInfo.num}
+                        total={commentList.total}
+                        showSizeChanger={false}
+                        pageSize={20}
+                    />
+                </CommentContent>
+            )}
         </div>
     );
 };
 
-const CommentWrap = ({ datas }) => {
-    return (
-        <div style={{ padding: "0 1rem" }}>
-            <Divider />
-            {datas.map((item) => {
-                if (!item.beReplied.length) {
-                    return <CommentItem key={item.commentId} {...item} />;
-                }
-                return (
-                    <CommentItem key={item.commentId} {...item}>
-                        {item.beReplied.map((_item) => {
-                            return <CommentItem key={_item.beRepliedCommentId} {..._item} />;
-                        })}
-                    </CommentItem>
-                );
-            })}
-        </div>
-    );
-};
 export default RecommendComment;

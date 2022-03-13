@@ -18,7 +18,6 @@ const AlbumsContent = ({ datas, ...props }) => {
                     </Col>
                 );
             })}
-
             <Col xs={24} style={{ textAlign: "center" }}>
                 <Pagination
                     showLessItems

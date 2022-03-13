@@ -1,7 +1,7 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { storageKey, urlPath } from "../../../configs/constant";
+import { createSlice } from "@reduxjs/toolkit";
+import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
-import { setStorge } from "../../../services/storgeHelper";
+
 const initialState = {
     loading: true,
     artistToplist: {},
@@ -15,7 +15,6 @@ export const topListSlice = createSlice({
     initialState,
     reducers: {
         initTopListByAmount(state, action) {
-            // console.log(action.payload);
             let loading = action.payload.topList.code === 200 ? false : true;
             return {
                 ...state,
@@ -56,9 +55,7 @@ export const getTopList =
             //     }),
             // ]);
 
-            console.log(playlist, "playList");
             //獲取全部歌單個曲
-
             dispatch(initTopListByAmount({ topList, playlist: { playlist, privileges } }));
         } catch (error) {
             console.log(error, "getTopList");
@@ -73,7 +70,7 @@ export const getTopPlayListDetail =
 
             dispatch(setTopPlayListDetailByAmount({ playlist, privileges }));
         } catch (error) {
-            console.log(error, "getTopList");
+            console.log(error, "getTopPlayListDetail");
         }
     };
 

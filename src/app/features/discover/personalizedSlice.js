@@ -17,22 +17,21 @@ export const personalizedSlice = createSlice({
     initialState,
     reducers: {
         personalizedByAmount(state, action) {
-            // console.log(action.payload, "action.payload");
-            const [
-                { banners: bannerList },
-                { result: personalized },
-                { result: newsong },
-                privatecontent,
-                { result: mv },
-            ] = action.payload;
+            const [{ banners: bannerList }, { result: personalized }] = action.payload;
             return {
                 ...state,
                 bannerList,
                 personalized,
+                loading: false,
+            };
+        },
+        personalized2ByAmount(state, action) {
+            const [{ result: newsong }, privatecontent, { result: mv }] = action.payload;
+            return {
+                ...state,
                 newsong,
                 privatecontent,
                 mv,
-                loading: false,
             };
         },
         onLoading(state, action) {
@@ -41,7 +40,7 @@ export const personalizedSlice = createSlice({
     },
 });
 
-export const { personalizedByAmount, onLoading } = personalizedSlice.actions;
+export const { personalizedByAmount, personalized2ByAmount, onLoading } = personalizedSlice.actions;
 
 export const getPersonalizedList =
     (params = {}) =>
@@ -51,12 +50,14 @@ export const getPersonalizedList =
             const datas = await Promise.all([
                 await apiHandle({ url: urlPath.HOME_BANNER, params }),
                 await apiHandle({ url: urlPath.HOME_PERSONALIZED, params }),
+            ]);
+            dispatch(personalizedByAmount(datas));
+            const datas1 = await Promise.all([
                 await apiHandle({ url: urlPath.HOME_NEWSONG, params }),
                 await apiHandle({ url: urlPath.HOME_PRIVATECONTENT, params }),
                 await apiHandle({ url: urlPath.HOME_MV, params }),
             ]);
-
-            dispatch(personalizedByAmount(datas));
+            dispatch(personalized2ByAmount(datas1));
         } catch (error) {
             console.log(error, "getPersonalizedList");
         }

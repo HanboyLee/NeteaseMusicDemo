@@ -5,7 +5,6 @@ module.exports = (req, res) => {
 
     // 代理目标地址
     // 这里使用 backend 主要用于区分 vercel serverless 的 api 路径
-    console.log(req.url, "???");
     if (req.url.startsWith("/api")) {
         target = "https://netease-cloud-api-sigma.vercel.app";
     }

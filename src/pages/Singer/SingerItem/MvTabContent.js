@@ -10,7 +10,7 @@ const MvTabContent = ({ datas }) => {
             {datas.map((item) => {
                 return (
                     <VideoBox key={item.id} xs={24} md={8}>
-                        <LinkItem to={`/singerPlayer/${item.id}`}>
+                        <LinkItem to={`/mvPlayer/${item.id}`}>
                             <VideoImage {...item} />
                         </LinkItem>
                     </VideoBox>

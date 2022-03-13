@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { getNewSongsList, onClickArea } from "../../app/features/lasterList/newSongsSlice";
 
 //components
-import Loading from "../../components/Loading";
 import MusicTableList from "../../components/MusicTableList";
 import Option from "../../components/Option";
 

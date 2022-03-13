@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRecommendSongsDeatil } from "../../../app/features/lasterList/recommendSongSlice";
 
 //components
-import Loading from "../../../components/Loading";
 import MusicTableList from "../../../components/MusicTableList";
 
 const extractIds = ({ ids, current = 0, pageSize = 10 }) => {

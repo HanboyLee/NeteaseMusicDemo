@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Col } from "antd";
+
 import styled from "@emotion/styled/macro";
 import { themeConstant } from "../../configs/constant";
 import { NavLink } from "react-router-dom";
@@ -26,8 +26,8 @@ const ImageCard = ({ id, navigateTo, picUrl, name, playCount }) => {
 };
 
 const ImageItem = styled(Img)`
+    display: block;
     width: 100%;
-    height: 100%;
     object-fit: cover;
     transition: all 0.3s ease-in;
     border-radius: 5px;
@@ -38,7 +38,9 @@ const ImageItem = styled(Img)`
 `;
 const ImageBox = styled.div`
     width: 100%;
+    height: 100%;
     cursor: pointer;
+    position: relative;
 `;
 
 const Text = styled.div`

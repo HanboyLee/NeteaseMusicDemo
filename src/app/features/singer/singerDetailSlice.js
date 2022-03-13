@@ -95,8 +95,6 @@ export const getSingerMv = (params) => async (dispatch) => {
         const datas = await Promise.all([
             // 歌手單個mv描述
             apiHandle({ url: urlPath.MV_PROFILE, params: params[0] }),
-            //mv評論
-            apiHandle({ url: urlPath.MV_COMMENT, params: params[1] }),
             //歌手單個mv url
             apiHandle({ url: urlPath.MV_URL, params: params[1] }),
             //相關mv

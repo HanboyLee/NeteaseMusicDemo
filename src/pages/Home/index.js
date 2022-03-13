@@ -30,7 +30,6 @@ const Home = () => {
         return <Loading />;
     }
 
-    console.log(mv);
     return (
         <Container>
             {/* Swiper */}
@@ -45,9 +44,9 @@ const Home = () => {
                 </LinkTitleWrap>
                 <Row gutter={[30, 10]}>
                     {/* title */}
-                    {personalized.map((item) => {
+                    {personalized?.map((item) => {
                         return (
-                            <Col key={item.id} md={6}>
+                            <Col key={item?.id} md={6}>
                                 <ImageCard navigateTo={"recommenedSongs/"} {...item} />
                             </Col>
                         );
@@ -58,13 +57,13 @@ const Home = () => {
             <CommenContent>
                 <LinkTitleWrap to={"/recommenedSongs"}>
                     <Typography.Title level={5} className={"title"}>
-                        {privatecontent.name}
+                        {privatecontent?.name}
                         <RightOutlined />
                     </Typography.Title>
                 </LinkTitleWrap>
                 <Row gutter={[30, 10]}>
                     {/* title */}
-                    {privatecontent.result.map((item) => {
+                    {privatecontent?.result?.map((item) => {
                         return (
                             <Col key={item.id} md={8}>
                                 <ImageCard navigateTo={"recommenedSongs/"} {...item} />
@@ -82,9 +81,9 @@ const Home = () => {
                     </Typography.Title>
                 </LinkTitleWrap>
                 <Row gutter={[30, 20]}>
-                    {newsong.map((item) => {
+                    {newsong?.map((item) => {
                         return (
-                            <Col key={item.id} md={8} onClick={() => onSavePlaySong(item)}>
+                            <Col key={item?.id} md={8} onClick={() => onSavePlaySong(item)}>
                                 <SongsWrap>
                                     <div className="imgWrap">
                                         <Img src={item?.picUrl} />
@@ -108,11 +107,11 @@ const Home = () => {
                     </Typography.Title>
                 </LinkTitleWrap>
                 <Row gutter={[30, 20]}>
-                    {mv.map((item) => {
+                    {mv?.map((item) => {
                         return (
-                            <Col key={item.id} md={6}>
-                                <Link to={`/singerPlayer/${item.id}`}>
-                                    <VideoImage name={item.artistName} cover={item.picUrl} {...item} />
+                            <Col key={item?.id} md={6}>
+                                <Link to={`/mvPlayer/${item.id}`}>
+                                    <VideoImage name={item?.artistName} cover={item?.picUrl} {...item} />
                                 </Link>
                             </Col>
                         );

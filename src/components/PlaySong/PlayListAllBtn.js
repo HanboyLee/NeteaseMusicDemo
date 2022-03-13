@@ -5,7 +5,6 @@ import { themeConstant } from "../../configs/constant";
 import { useOnSaveSongAllBtn } from "../../hooks/AudioHook";
 
 const PlayListAllBtn = ({ datas, isTooMuch = false }) => {
-    console.log(isTooMuch, "1........................");
     const onSaveSongAllBtn = useOnSaveSongAllBtn(isTooMuch);
     return (
         <Container>

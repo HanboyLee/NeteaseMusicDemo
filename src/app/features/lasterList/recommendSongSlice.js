@@ -31,7 +31,7 @@ const initialState = {
     total: 0,
     queryInfo: {
         cat: "全部",
-        limit: 8,
+        limit: 18,
         num: 1,
     },
     playDeatail: {},

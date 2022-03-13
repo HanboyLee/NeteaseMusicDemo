@@ -20,7 +20,7 @@ import Loading from "./components/Loading";
 const Home = React.lazy(() => import("./pages/Home"));
 const Singer = React.lazy(() => import("./pages/Singer"));
 const SingerItem = React.lazy(() => import("./pages/Singer/SingerItem"));
-const ViedoContent = React.lazy(() => import("./components/Video/ViedoContent"));
+const MvContent = React.lazy(() => import("./pages/MvLatest/MvContent"));
 const Album = React.lazy(() => import("./pages/Album"));
 const MvLatest = React.lazy(() => import("./pages/MvLatest"));
 const HotSinger = React.lazy(() => import("./pages/HotSinger"));
@@ -102,11 +102,11 @@ const App = () => {
                     ),
                 },
                 {
-                    //歌手ＭＶ
-                    path: "singerPlayer/:singerId",
+                    //ＭＶ
+                    path: "mvPlayer/:mvId",
                     element: (
                         <Suspense>
-                            <ViedoContent />
+                            <MvContent />
                         </Suspense>
                     ),
                 },

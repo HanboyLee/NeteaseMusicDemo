@@ -1,8 +1,8 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import { storageKey, urlPath } from "../../../configs/constant";
+import { createSlice } from "@reduxjs/toolkit";
+
+import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
-import { setStorge } from "../../../services/storgeHelper";
+
 const initialState = {
     loading: true,
     //過濾器導覽
@@ -31,7 +31,6 @@ export const mvLatestListSlice = createSlice({
     initialState,
     reducers: {
         initMVAllByAmount(state, action) {
-            // console.log(action.payload);
             let loading = action.payload.code === 200 ? false : true;
             return {
                 ...state,

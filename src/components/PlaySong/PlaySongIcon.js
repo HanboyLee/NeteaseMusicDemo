@@ -6,7 +6,14 @@ import { useOnSavePlaySong } from "../../hooks/AudioHook";
 
 const PlaySongIcon = (params) => {
     const onSavePlaySong = useOnSavePlaySong();
-    return <PlayIcon hover onClick={() => onSavePlaySong(params)} />;
+    return (
+        <PlayIcon
+            hover
+            onClick={() => {
+                onSavePlaySong(params);
+            }}
+        />
+    );
 };
 export default PlaySongIcon;
 

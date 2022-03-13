@@ -2,7 +2,6 @@ import axios from "axios";
 import { API_URL, API_TIMEOUT } from "../configs/config";
 import nprogress from "nprogress";
 import { message } from "antd";
-import { getStorge } from "./storgeHelper";
 
 const instace = function () {
     const createInstance = axios.create({
@@ -22,7 +21,7 @@ const instace = function () {
 
 //Response
 const handleResponse = (res) => {
-    console.log(res, "handleResponse", 23);
+    // console.log(res, "handleResponse", 23);
     if (res.data.code !== 200) {
         message.error(res?.data?.message || "加載資料失敗", 2);
     }

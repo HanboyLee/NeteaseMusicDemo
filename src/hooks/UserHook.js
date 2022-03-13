@@ -1,9 +1,10 @@
+import { message } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authSignup, getCountrieCode, setHasVerify } from "../app/features/login/loginSlice";
-import { getStorge } from "../services/storgeHelper";
+
 const Context = React.createContext();
 
 const UserHook = ({ children }) => {
@@ -107,6 +108,7 @@ export const useInittal = () => {
         dispatch(setHasVerify(false));
     };
 };
+
 //註冊
 export const useOnSignup = () => {
     const dispatch = useDispatch();
@@ -143,6 +145,14 @@ export const useOnSignup = () => {
     // password: 密码
     // nickname: 昵称
     // countrycode;国家码
+};
+
+//未登入狀態跳出視窗
+export const useNotLoginToPopupLoginModal = () => {
+    const [, setShow] = useShowModal();
+    return ({ msg }) => {
+        message.info(msg, 0.7, () => setShow(true));
+    };
 };
 
 export const withLogin = (Com) => (props) => {

@@ -1,7 +1,7 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { message } from "antd";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import { storageKey, urlPath } from "../../../configs/constant";
+
+import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
 import { clearStroge, getStorge, setStorge } from "../../../services/storgeHelper";
 const initialState = {
@@ -76,7 +76,6 @@ export const getCaptcha =
         try {
             // dispatch(onQRCodeLoading(true));
             const datas = await apiHandle({ url: urlPath.USER_SENT_CAPTCHA_CODE, params });
-            console.log(datas, "getCaptcha");
             if (datas.code === 400) {
                 return;
             }
@@ -102,7 +101,6 @@ export const checkPhoneHasUsing = async (params = {}) => {
 export const authVerify = async (params) => {
     try {
         const { data } = await apiHandle({ url: urlPath.USER_VERIFY, params });
-        console.log(data);
         return data;
     } catch (error) {
         message.error(error.message);
@@ -130,7 +128,6 @@ export const authSignup = (params) => async (dispatch) => {
         const isVerify = await authVerify(params);
         if (isVerify) {
             const { profile: userInfo, token, ...rest } = await apiHandle({ url: urlPath.USER_SIGNUP, params });
-            console.log(userInfo, token, ...rest);
             dispatch(userLogin({ userInfo, token }));
         }
     } catch (e) {
