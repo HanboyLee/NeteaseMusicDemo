@@ -13,7 +13,7 @@ const ImageCard = ({ id, navigateTo, picUrl, name, playCount }) => {
                 <ImageItem alt="example" src={picUrl + "?param=500y500"} preview={false} />
             </ImageBox>
             <Text>{name}</Text>
-            {playCount && (
+            {String(playCount) && (
                 <PlayCount>
                     <div className="count">
                         <CustomerServiceFilled className="icon" />

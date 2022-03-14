@@ -39,7 +39,7 @@ const MyMusic = () => {
             </Container>
             <Container gutter={[10, 10]}>
                 <Col md={24}>
-                    <Typography.Title level={5}>收藏的歌单({filterList(false).length})</Typography.Title>
+                    <Typography.Title level={5}>收藏的歌单({filterList(true).length})</Typography.Title>
                 </Col>
                 {filterList(true).map((item) => {
                     return (

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authSignup, getCountrieCode, setHasVerify } from "../app/features/login/loginSlice";
+import { getStorge } from "../services/storgeHelper";
 
 const Context = React.createContext();
 
@@ -17,7 +18,10 @@ const UserHook = ({ children }) => {
     const [userPwd, setUserPwd] = React.useState("");
     const [nickname, setNickname] = React.useState("");
     const { userInfo } = useSelector((state) => state.login);
-    const isLogin = React.useMemo(() => "userId" in userInfo, [userInfo]);
+    //密碼輸入錯誤也會登入
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const isLogin = React.useMemo(() => getStorge({ key: "loginType" }), [userInfo]);
 
     React.useEffect(() => {
         dispatch(getCountrieCode());
@@ -120,13 +124,6 @@ export const useOnSignup = () => {
     const [, setShow] = useShowModal();
     const initialHandle = useInittal();
     return () => {
-        console.log({
-            phone,
-            countrycode,
-            captcha,
-            password,
-            nickname,
-        });
         dispatch(
             authSignup({
                 phone,

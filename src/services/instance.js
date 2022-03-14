@@ -9,9 +9,7 @@ const instace = function () {
         url: API_URL,
         timeout: API_TIMEOUT,
         responseType: "json",
-        params: {
-            cookie: JSON.parse(localStorage.getItem("token") || JSON.stringify({ cookie: "" })).cookie,
-        },
+        params: {},
     });
     createInstance.interceptors.response.use(handleResponse, handleError);
     createInstance.interceptors.request.use(handleRequest, handleError);
@@ -21,16 +19,20 @@ const instace = function () {
 
 //Response
 const handleResponse = (res) => {
-    // console.log(res, "handleResponse", 23);
-    if (res.data.code !== 200) {
-        message.error(res?.data?.message || "加載資料失敗", 2);
+    try {
+        // console.log(res, "handleResponse", 23);
+        if (res.data.code !== 200) {
+            throw new Error(res?.data?.message);
+        }
+        nprogress.done();
+        return res.data;
+    } catch (error) {
+        message.error(error.message || "加載資料失敗", 2);
+        nprogress.done();
     }
-    nprogress.done();
-    return res.data;
 };
 //Request
 const handleRequest = (config) => {
-    // console.log(config, "handleRequest", 28);
     nprogress.start();
     return config;
 };

@@ -3,6 +3,7 @@ import { message } from "antd";
 
 import { urlPath } from "../../../configs/constant";
 import { apiHandle } from "../../../services/apiUtils";
+import { docCookies } from "../../../services/cookieHelper";
 import { clearStroge, getStorge, setStorge } from "../../../services/storgeHelper";
 const initialState = {
     qrcodeLoading: true,
@@ -16,7 +17,7 @@ export const loginSlice = createSlice({
     reducers: {
         userLogin(state, action) {
             setStorge({ key: "userInfo", value: action.payload.userInfo });
-            setStorge({ key: "token", value: action.payload.token });
+            setStorge({ key: "loginType", value: Boolean(action.payload.loginType) });
             return {
                 ...state,
                 userInfo: action.payload.userInfo,
@@ -114,8 +115,9 @@ export const authLogin = (params) => async (dispatch) => {
         const isVerify = params?.methodType ? !!params.methodType : await authVerify(params);
         if (isVerify) {
             delete params.methodType;
-            const { profile: userInfo, token } = await apiHandle({ url: urlPath.USER_LOGIN, params });
-            dispatch(userLogin({ userInfo, token }));
+            const { profile: userInfo, cookie, loginType } = await apiHandle({ url: urlPath.USER_LOGIN, params });
+            document.cookie = cookie;
+            dispatch(userLogin({ userInfo, loginType }));
         }
     } catch (error) {
         console.log(error, "AuthLogin");
@@ -127,16 +129,19 @@ export const authSignup = (params) => async (dispatch) => {
     try {
         const isVerify = await authVerify(params);
         if (isVerify) {
-            const { profile: userInfo, token, ...rest } = await apiHandle({ url: urlPath.USER_SIGNUP, params });
-            dispatch(userLogin({ userInfo, token }));
+            const { profile: userInfo, cookie, loginType } = await apiHandle({ url: urlPath.USER_SIGNUP, params });
+            document.cookie = cookie;
+            dispatch(userLogin({ userInfo, loginType }));
         }
     } catch (e) {
         message.error(e.message, 2);
     }
 };
 
+//登出
 export const userLogout = (params) => async (dispatch) => {
     await apiHandle({ url: urlPath.USER_LOGOUT });
+    docCookies.removeItem("MUSIC_U");
     dispatch(logout());
 };
 

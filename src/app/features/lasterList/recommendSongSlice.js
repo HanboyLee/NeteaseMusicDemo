@@ -7,7 +7,7 @@ const initialState = {
     loading: true,
     listLoading: true,
     detailLoading: true,
-    songsLoading: true,
+    songLoading: true,
     subscribeLoading: true,
     //過濾器導覽
     tagbar: [],
@@ -112,7 +112,7 @@ export const recommendSongSlice = createSlice({
             return { ...state, detailLoading: action.payload };
         },
         setSongsLoading(state, action) {
-            return { ...state, songsLoading: action.payload };
+            return { ...state, songLoading: action.payload };
         },
         setSubscribeLoading(state, action) {
             return { ...state, subscribeLoading: action.payload };

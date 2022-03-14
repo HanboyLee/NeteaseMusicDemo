@@ -32,7 +32,6 @@ const RecommendList = ({ trackIds }) => {
     const onPagination = (current, pageSize) => {
         dispatch(getRecommendSongsDeatil({ ids: extractIds({ ids: trackIds, current: current - 1, pageSize }) }));
     };
-
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <MusicTableList
