@@ -48,6 +48,7 @@ const Singer = () => {
             />
             {/* 列表 */}
             <ImageListsRow gutter={[10, 30]}>
+                {console.log(singer, "111")}
                 {singer.artists.map((item) => {
                     return (
                         <Col key={item.id} xs={24} md={6}>

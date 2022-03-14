@@ -7,13 +7,14 @@ import Img from "./Img";
 import { extractPlayCountHandle } from "../../utils/common";
 import { CustomerServiceFilled } from "@ant-design/icons";
 const ImageCard = ({ id, navigateTo, picUrl, name, playCount }) => {
+    const hasPlayCount = React.useMemo(() => playCount || playCount === 0, [playCount]);
     return (
         <Link replace={true} to={`/${navigateTo}${id}`}>
             <ImageBox>
                 <ImageItem alt="example" src={picUrl + "?param=500y500"} preview={false} />
             </ImageBox>
             <Text>{name}</Text>
-            {String(playCount) && (
+            {hasPlayCount && (
                 <PlayCount>
                     <div className="count">
                         <CustomerServiceFilled className="icon" />

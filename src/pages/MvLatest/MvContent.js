@@ -15,7 +15,7 @@ import Video from "../../components/Video/Video";
 
 const MvContent = () => {
     const { mvId } = useParams();
-    const continerRef = React.useRef();
+    const containerRef = React.useRef();
     const dispatch = useDispatch();
     const { currentMv, loading } = useSelector((state) => state.singerDetail || "");
 
@@ -28,6 +28,7 @@ const MvContent = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mvId]);
 
+    //監聽評論發文
     React.useEffect(() => {
         dispatch(getComment({ id: mvId, offset: queryInfo.offset, timestamp: refreshComment }, urlPath.MV_COMMENT));
     }, [dispatch, queryInfo, mvId, refreshComment]);
@@ -35,7 +36,7 @@ const MvContent = () => {
     const [mvDetailSet, urlSet, mvRelated] = React.useMemo(() => currentMv || [], [currentMv]);
 
     if (!currentMv.length) {
-        return <LoadingOutlined style={{ fontSize: continerRef.current?.offsetHeight || 0 }} />;
+        return <LoadingOutlined style={{ fontSize: containerRef.current?.offsetHeight || 0 }} />;
     }
 
     //評論分頁
@@ -44,7 +45,7 @@ const MvContent = () => {
     };
 
     return (
-        <Contianer ref={continerRef}>
+        <Contianer ref={containerRef}>
             <div style={{ flexBasis: "80%" }}>
                 <Video loading={loading} imgSrc={mvDetailSet.cover} videoSrc={urlSet.url} />
                 <MvInfoWrap>
@@ -65,7 +66,7 @@ const MvContent = () => {
                 </MvInfoWrap>
                 {/* 評論區 */}
                 {!commentLoading && (
-                    <CommentContent t={1} type={1} datas={commentList}>
+                    <CommentContent id={mvId} t={1} type={1} datas={commentList}>
                         <Pagination
                             style={{ textAlign: "center" }}
                             showLessItems
