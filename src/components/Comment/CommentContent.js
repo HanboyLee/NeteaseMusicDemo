@@ -5,7 +5,6 @@ import Comment from "./Comment";
 import InputComment from "./InputComment";
 
 const CommentContent = ({ datas, children, ...props }) => {
-    console.log(props, "???");
     return (
         <Container>
             <InputComment {...props} />

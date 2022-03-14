@@ -62,9 +62,7 @@ export const getComment =
 
 export const postComment = (params) => async (dispatch) => {
     try {
-        console.log(params);
         const { comment } = await apiHandle({ url: urlPath.USER_SET_COMMENT, params });
-        console.log(comment);
         message.info("评论发送成功");
         dispatch(onPostCommenttimestamp(comment.time));
     } catch (error) {
