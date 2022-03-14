@@ -1,4 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled/macro";
 import { Button, Col, Row } from "antd";
 import React from "react";

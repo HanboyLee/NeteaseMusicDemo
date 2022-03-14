@@ -6,8 +6,6 @@ import { Table } from "antd";
 import { transforTime } from "../../utils/common";
 //components
 import PlaySongIcon from "../../components/PlaySong/PlaySongIcon";
-import { setStorge } from "../../services/storgeHelper";
-import { storageKey } from "../../configs/constant";
 
 const Lists = ({ datas }) => {
     const transforDatas = datas.map((item, i) => {

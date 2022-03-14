@@ -15,11 +15,16 @@ const PlayerBar = ({ url }) => {
     //     const init = getStorge({ key: storageKey.TRACK_QUEUE_SONG });
     //     return init ? [init] : [];
     // }, []);
-    const onAudioListsChange = (_, list) => {
-        //TODO: 移除或搬移都會影響歌單重新載入
-        dispatch(updateAudioList(list));
-        // audioRef.current.updatePlayIndex(list.length - 1);
-    };
+    const onAudioListsChange = React.useCallback(
+        (_, list) => {
+            //TODO: 移除或搬移都會影響歌單重新載入
+            const prevListLen = audioLists.length;
+            audioRef.current.playByIndex(prevListLen - 1);
+
+            dispatch(updateAudioList(list));
+        },
+        [dispatch, audioRef, audioLists]
+    );
 
     return (
         <ReactJkMusicPlayer
