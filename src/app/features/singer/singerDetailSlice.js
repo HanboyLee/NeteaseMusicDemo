@@ -100,6 +100,7 @@ export const getSingerMv = (params) => async (dispatch) => {
             //相關mv
             apiHandle({ url: urlPath.MV_RELATED, params: params[0] }),
         ]);
+        console.log({ url: urlPath.MV_URL, params: params[1] });
         console.log(datas, "datas");
         const extract = datas.map((item) => item?.data || item?.mvs || item);
         dispatch(getCurrentMvByAmount(extract));
