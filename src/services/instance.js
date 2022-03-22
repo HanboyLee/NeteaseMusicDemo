@@ -10,7 +10,7 @@ const instace = function () {
         timeout: API_TIMEOUT,
         responseType: "json",
         params: {
-            realIP: "116.25.146.177",
+            realIP: "211.161.244.70",
         },
     });
     createInstance.interceptors.response.use(handleResponse, handleError);
@@ -35,6 +35,7 @@ const handleResponse = (res) => {
 };
 //Request
 const handleRequest = (config) => {
+    console.log(config, "??");
     nprogress.start();
     return config;
 };
