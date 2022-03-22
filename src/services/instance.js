@@ -20,7 +20,7 @@ const instace = function () {
 //Response
 const handleResponse = (res) => {
     try {
-        console.log(res, "handleResponse", 23);
+        // console.log(res, "handleResponse", 23);
         if (res.data.code !== 200) {
             throw new Error(res?.data?.message);
         }
