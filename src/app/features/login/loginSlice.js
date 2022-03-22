@@ -116,6 +116,7 @@ export const authLogin = (params) => async (dispatch) => {
         if (isVerify) {
             delete params.methodType;
             const { profile: userInfo, cookie, loginType } = await apiHandle({ url: urlPath.USER_LOGIN, params });
+            console.log(userInfo, cookie, loginType, "??");
             document.cookie = cookie;
             dispatch(userLogin({ userInfo, loginType }));
         }
