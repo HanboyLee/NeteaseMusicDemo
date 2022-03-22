@@ -65,7 +65,7 @@ export const getSong = (param, songInfo) => async (dispatch) => {
     try {
         const params = {
             ...param,
-            realIP: "116.25.146.177",
+            // realIP: "116.25.146.177",
         };
 
         const [{ data }, { lrc: songLrc }] = await Promise.all([
@@ -87,7 +87,7 @@ export const getSongs = (param, songInfo) => async (dispatch) => {
         message.loading("正在为您添加歌曲");
         const params = {
             id: param.id.join(","),
-            realIP: "116.25.146.177",
+            // realIP: "116.25.146.177",
         };
         // 歌曲url
         const { data } = await apiHandle({ url: urlPath.SONG_URL, params });
