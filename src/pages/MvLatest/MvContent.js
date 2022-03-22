@@ -23,7 +23,7 @@ const MvContent = () => {
 
     React.useEffect(() => {
         if (mvId) {
-            dispatch(getSingerMv([{ mvid: mvId }, { id: mvId }]));
+            dispatch(getSingerMv([{ mvid: mvId }, { id: mvId, realIP: "116.25.146.177" }]));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mvId]);

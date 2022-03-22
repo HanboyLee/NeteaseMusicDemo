@@ -10,7 +10,8 @@ const instace = function () {
         timeout: API_TIMEOUT,
         responseType: "json",
         params: {
-            realIP: "211.161.244.70",
+            // realIP: "211.161.244.70",
+            // realIP: "116.25.146.177",
         },
     });
     createInstance.interceptors.response.use(handleResponse, handleError);
