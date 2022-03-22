@@ -9,7 +9,9 @@ const instace = function () {
         url: API_URL,
         timeout: API_TIMEOUT,
         responseType: "json",
-        params: {},
+        params: {
+            realIP: "116.25.146.177",
+        },
     });
     createInstance.interceptors.response.use(handleResponse, handleError);
     createInstance.interceptors.request.use(handleRequest, handleError);
