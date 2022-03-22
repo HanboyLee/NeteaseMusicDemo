@@ -23,7 +23,7 @@ const instace = function () {
 //Response
 const handleResponse = (res) => {
     try {
-        // console.log(res, "handleResponse", 23);
+        console.log(res, "handleResponse", 23);
         if (res.data.code !== 200) {
             throw new Error(res?.data?.message);
         }
@@ -36,7 +36,7 @@ const handleResponse = (res) => {
 };
 //Request
 const handleRequest = (config) => {
-    console.log(config, "??");
+    // console.log(config, "??");
     nprogress.start();
     return config;
 };

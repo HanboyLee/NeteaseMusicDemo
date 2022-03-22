@@ -72,7 +72,7 @@ const MvContent = () => {
                             showLessItems
                             onChange={onPagination}
                             current={queryInfo.num}
-                            total={commentList.total}
+                            total={commentList?.total ?? 0}
                             showSizeChanger={false}
                             pageSize={20}
                         />
