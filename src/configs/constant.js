@@ -27,7 +27,7 @@ export const urlPath = {
     //MV
     MV_PROFILE: "/mv/detail",
 
-    MV_URL: "mv/url",
+    MV_URL: "/mv/url",
     MV_RELATED: "/simi/mv",
     ALBUMLISTS: "/album",
     SINGER_LISTS: "/artist/list",
