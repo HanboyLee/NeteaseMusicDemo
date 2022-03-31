@@ -73,7 +73,7 @@ export const urlPath = {
     //評論
     USER_SET_COMMENT: "/comment", // 發送/回覆
     RECOMMEND_COMMENT: "/comment/playlist", //歌單評論
-    MV_COMMENT: "comment/mv", //MV評論
+    MV_COMMENT: "/comment/mv", //MV評論
     ALBUM_COMMENT: "/comment/album", //專輯評論
 };
 
