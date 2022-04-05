@@ -99,7 +99,7 @@ const Album = () => {
                     </div>
                     <div className="topInfo">
                         <Tag className="tag " color="magenta">
-                            發行時間
+                            發行公司
                         </Tag>
                         <span>：{album.company || "無"}</span>
                     </div>
