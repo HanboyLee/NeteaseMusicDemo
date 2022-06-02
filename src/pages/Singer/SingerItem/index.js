@@ -1,15 +1,15 @@
-import styled from "@emotion/styled/macro";
-import { Button, Col, Row, Typography } from "antd";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { singerDetailAsync } from "../../../app/features/singer/singerDetailSlice";
-import { themeConstant } from "../../../configs/constant";
+import styled from '@emotion/styled/macro';
+import { Button, Col, Row, Typography } from 'antd';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { singerDetailAsync } from '../../../app/features/singer/singerDetailSlice';
+import { themeConstant } from '../../../configs/constant';
 
 //components
-import TabContent from "./TabContent";
-import Image from "../../../components/Image/Img";
-import Loading from "../../../components/Loading";
+import TabContent from './TabContent';
+import Image from '../../../components/Image/Img';
+import Loading from '../../../components/Loading';
 const SingerItem = (props) => {
     const { singerId } = useParams();
     const dispatch = useDispatch();
@@ -26,13 +26,13 @@ const SingerItem = (props) => {
     }
     return (
         <Container>
-            <Row style={{ height: "100%" }} gutter={[30, 20]}>
+            <Row style={{ height: '100%' }} gutter={[30, 20]}>
                 <StyleCol xs={24}>
-                    <div style={{ width: "800px", margin: "0 auto" }}>
+                    <div style={{ width: '100%', margin: '0 auto' }}>
                         <ImgBox>
                             <Img
                                 preview={false}
-                                src={singerDetail?.artist?.cover + "?param=800y300?param=640y300"}
+                                src={singerDetail?.artist?.cover + '?param=800y300?param=640y300'}
                                 alt={singerDetail?.artist?.briefDesc}
                             />
                             <CollectBtn onClick={onCollectToProfile} danger type="ghost">
@@ -40,7 +40,7 @@ const SingerItem = (props) => {
                             </CollectBtn>
                         </ImgBox>
                         <Introduce>
-                            <Text strong type={"danger"}>
+                            <Text strong type={'danger'}>
                                 歌手： {singerDetail.artist?.name}
                             </Text>
 
@@ -58,7 +58,7 @@ const SingerItem = (props) => {
                         />
                     </div>
                 </StyleCol>
-                <StyleCol xs={24}></StyleCol>
+                {/* <StyleCol xs={24}></StyleCol> */}
                 {/* <StyleCol xs={24}>1</StyleCol> */}
             </Row>
         </Container>
@@ -85,6 +85,11 @@ const ImgBox = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
+    .ant-image {
+        width: 100%;
+        max-height: 300px;
+        overflow: hidden;
+    }
 `;
 
 const Text = styled(Typography.Text)`

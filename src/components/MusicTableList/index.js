@@ -1,8 +1,8 @@
-import { Table } from "antd";
-import React from "react";
-import { transforTime } from "../../utils/common";
-import Img from "../Image/Img";
-import PlaySongIcon from "../PlaySong/PlaySongIcon";
+import { Table } from 'antd';
+import React from 'react';
+import { transforTime } from '../../utils/common';
+import Img from '../Image/Img';
+import PlaySongIcon from '../PlaySong/PlaySongIcon';
 
 const MusicTableList = ({ loading = false, datas, paginationOption = {} }) => {
     const transforDatas = React.useMemo(
@@ -15,7 +15,7 @@ const MusicTableList = ({ loading = false, datas, paginationOption = {} }) => {
                     cover: item?.al?.picUrl || item.album.picUrl,
                     songTitle: item.name,
                     singer: item?.ar?.[0]?.name || item?.artists?.[0]?.name,
-                    duration: transforTime(item?.dt || item?.duration, "ms"),
+                    duration: transforTime(item?.dt || item?.duration, 'ms'),
                 };
             }) || [],
         [datas]
@@ -24,56 +24,55 @@ const MusicTableList = ({ loading = false, datas, paginationOption = {} }) => {
         <Table
             loading={loading}
             bordered
-            position={"buttomCenter"}
-            pagination={paginationOption}
+            pagination={({ position: 'topCenter' }, paginationOption)}
             dataSource={transforDatas}
             columns={[
                 {
-                    title: "索引",
-                    dataIndex: "index",
-                    key: "index",
-                    align: "center",
+                    title: '索引',
+                    dataIndex: 'index',
+                    key: 'index',
+                    align: 'center',
                 },
                 {
-                    title: "封面",
-                    dataIndex: "cover",
-                    key: "cover",
-                    align: "center",
+                    title: '封面',
+                    dataIndex: 'cover',
+                    key: 'cover',
+                    align: 'center',
                     render: (url) => {
                         return (
-                            <div style={{ width: 75, margin: "0 auto" }}>
+                            <div style={{ width: 75, margin: '0 auto' }}>
                                 <Img src={url} />
                             </div>
                         );
                     },
                 },
                 {
-                    title: "",
-                    dataIndex: "paly",
-                    key: "paly",
-                    align: "center",
+                    title: '',
+                    dataIndex: 'paly',
+                    key: 'paly',
+                    align: 'center',
                     render: (item) => {
                         return <PlaySongIcon {...item} />;
                     },
                 },
                 {
-                    title: "歌曲标题",
-                    dataIndex: "songTitle",
-                    key: "songTitle",
-                    align: "center",
+                    title: '歌曲标题',
+                    dataIndex: 'songTitle',
+                    key: 'songTitle',
+                    align: 'center',
                 },
                 {
-                    title: "时长",
-                    dataIndex: "duration",
-                    key: "duration",
-                    align: "center",
+                    title: '时长',
+                    dataIndex: 'duration',
+                    key: 'duration',
+                    align: 'center',
                 },
                 {
-                    title: "歌手",
-                    dataIndex: "singer",
-                    key: "singer",
-                    align: "center",
-                    width: "150px",
+                    title: '歌手',
+                    dataIndex: 'singer',
+                    key: 'singer',
+                    align: 'center',
+                    width: '150px',
                 },
             ]}
         />

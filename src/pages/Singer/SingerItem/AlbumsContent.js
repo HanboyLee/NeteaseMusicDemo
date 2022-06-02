@@ -1,8 +1,8 @@
-import { Col, Pagination, Row } from "antd";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { getAlbum } from "../../../app/features/singer/singerDetailSlice";
-import ImageCard from "../../../components/Image/ImageCard";
+import { Col, Pagination, Row } from 'antd';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { getAlbum } from '../../../app/features/singer/singerDetailSlice';
+import ImageCard from '../../../components/Image/ImageCard';
 
 const AlbumsContent = ({ datas, ...props }) => {
     const dispatch = useDispatch();
@@ -14,11 +14,11 @@ const AlbumsContent = ({ datas, ...props }) => {
             {datas.map((item) => {
                 return (
                     <Col key={item.id} xs={24} md={6}>
-                        <ImageCard navigateTo={"album/"} {...item} />
+                        <ImageCard navigateTo={'album/'} {...item} />
                     </Col>
                 );
             })}
-            <Col xs={24} style={{ textAlign: "center" }}>
+            <Col xs={24}>
                 <Pagination
                     showLessItems
                     onChange={onChange}

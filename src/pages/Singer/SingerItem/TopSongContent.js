@@ -1,10 +1,11 @@
-import styled from "@emotion/styled/macro";
-import React from "react";
-import { getAlbum } from "../../../app/features/singer/singerDetailSlice";
-import MusicTableList from "../../../components/MusicTableList";
-import PlayListAllBtn from "../../../components/PlaySong/PlayListAllBtn";
+import styled from '@emotion/styled/macro';
+import React from 'react';
+import { getAlbum } from '../../../app/features/singer/singerDetailSlice';
+import MusicTableList from '../../../components/MusicTableList';
+import PlayListAllBtn from '../../../components/PlaySong/PlayListAllBtn';
 
 const TopSongContent = ({ datas, ...props }) => {
+    console.log(datas);
     return (
         <>
             <BtnWrap>

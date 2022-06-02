@@ -1,17 +1,17 @@
-import styled from "@emotion/styled/macro";
-import { Tabs } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getSearch, setType } from "../../app/features/discover/searchSlice";
-import MvPane from "./MvPane";
-import SongListPane from "./SongListPane";
-import SongsPane from "./SongsPane";
+import styled from '@emotion/styled/macro';
+import { Tabs } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getSearch, setType } from '../../app/features/discover/searchSlice';
+import MvPane from './MvPane';
+import SongListPane from './SongListPane';
+import SongsPane from './SongsPane';
 
 const Search = () => {
     const { keywords } = useParams();
-    const { queryInfo, navBar, total } = useSelector((state) => state.search);
+    const { queryInfo, navBar, total = 0 } = useSelector((state) => state.search);
     const dispatch = useDispatch();
     const renderComs = [
         {
@@ -45,7 +45,7 @@ const Search = () => {
                     const { Comp } = renderComs.find((c) => c.id === item.id);
                     return (
                         <Tabs.TabPane
-                            tab={<div style={{ width: 75, minWidth: 50, textAlign: "center" }}>{item.name}</div>}
+                            tab={<div style={{ width: 75, minWidth: 50, textAlign: 'center' }}>{item.name}</div>}
                             key={item.id}
                         >
                             <Comp />

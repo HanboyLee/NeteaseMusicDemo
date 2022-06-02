@@ -1,38 +1,44 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import styled from "@emotion/styled/macro";
-import { Pagination, Typography } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useParams, Link } from "react-router-dom";
-import { getComment, setPagination } from "../../app/features/comment/commentSlice";
+import { LoadingOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled/macro';
+import { Pagination, Typography } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
+import { getComment, setPagination } from '../../app/features/comment/commentSlice';
 
-import { getSingerMv } from "../../app/features/singer/singerDetailSlice";
-import { urlPath } from "../../configs/constant";
-import CommentContent from "../../components/Comment/CommentContent";
-import VideoImage from "../../components/Image/VideoImage";
-import Video from "../../components/Video/Video";
+import { getSingerMv } from '../../app/features/singer/singerDetailSlice';
+import { urlPath } from '../../configs/constant';
+import CommentContent from '../../components/Comment/CommentContent';
+import VideoImage from '../../components/Image/VideoImage';
+import Video from '../../components/Video/Video';
 
 const MvContent = () => {
     const { mvId } = useParams();
     const containerRef = React.useRef();
     const dispatch = useDispatch();
-    const { currentMv, loading } = useSelector((state) => state.singerDetail || "");
+    const { currentMv, loading } = useSelector((state) => state.singerDetail || '');
 
     const { commentList, loading: commentLoading, queryInfo, refreshComment } = useSelector((state) => state.comment);
 
     React.useEffect(() => {
         if (mvId) {
-            dispatch(getSingerMv([{ mvid: mvId }, { id: mvId, realIP: "116.25.146.177" }]));
+            dispatch(getSingerMv([{ mvid: mvId }, { id: mvId, realIP: '116.25.146.177' }]));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mvId]);
+
+    /**
+     * useEffect 生命週期
+     * mouted =>no datas - [] -> useMemo ->[currentMv]-> currentMv
+     * update
+     * unmouted
+     */
 
     //監聽評論發文
     React.useEffect(() => {
         dispatch(getComment({ id: mvId, offset: queryInfo.offset, timestamp: refreshComment }, urlPath.MV_COMMENT));
     }, [dispatch, queryInfo, mvId, refreshComment]);
-
     const [mvDetailSet, urlSet, mvRelated] = React.useMemo(() => currentMv || [], [currentMv]);
 
     if (!currentMv.length) {
@@ -46,7 +52,7 @@ const MvContent = () => {
 
     return (
         <Contianer ref={containerRef}>
-            <div style={{ flexBasis: "80%" }}>
+            <div style={{ flexBasis: '80%' }}>
                 <Video loading={loading} imgSrc={mvDetailSet.cover} videoSrc={urlSet.url} />
                 <MvInfoWrap>
                     <Typography.Title level={4}>{mvDetailSet.artistName}</Typography.Title>
@@ -54,8 +60,8 @@ const MvContent = () => {
                         {mvDetailSet.name}
                         <PushTime>
                             <span>發布：{mvDetailSet.publishTime}</span>
-                            <span style={{ marginLeft: "1rem" }}>
-                                播放：<span style={{ color: "#f00" }}>{mvDetailSet.playCount}</span> 次
+                            <span style={{ marginLeft: '1rem' }}>
+                                播放：<span style={{ color: '#f00' }}>{mvDetailSet.playCount}</span> 次
                             </span>
                         </PushTime>
                     </Typography.Title>
@@ -68,7 +74,7 @@ const MvContent = () => {
                 {!commentLoading && (
                     <CommentContent id={mvId} t={1} type={1} datas={commentList}>
                         <Pagination
-                            style={{ textAlign: "center" }}
+                            style={{ textAlign: 'center' }}
                             showLessItems
                             onChange={onPagination}
                             current={queryInfo.num}
@@ -80,8 +86,8 @@ const MvContent = () => {
                 )}
             </div>
             {/* 側邊欄相關ＭＶ */}
-            <div style={{ flex: 1, width: "20%" }}>
-                <Typography.Title style={{ textAlign: "center" }} level={4}>
+            <div style={{ flex: 1, width: '20%' }}>
+                <Typography.Title style={{ textAlign: 'center' }} level={4}>
                     相关MV
                 </Typography.Title>
                 {mvRelated.map((item) => {

@@ -1,35 +1,35 @@
-import React from "react";
-import "./App.less";
-import "nprogress/nprogress.css";
-import { store } from "./app/store";
-import { Provider } from "react-redux";
-import { BrowserRouter as Router, useRoutes } from "react-router-dom";
-import { ThemeProvider, useTheme } from "@emotion/react";
-import theme from "./configs/themes";
-import zhCN from "antd/lib/locale/zh_CN";
-import { ConfigProvider } from "antd";
+import React from 'react';
+import './App.less';
+import 'nprogress/nprogress.css';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
+import { ThemeProvider, useTheme } from '@emotion/react';
+import theme from './configs/themes';
+import zhCN from 'antd/lib/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 
-import NavBar from "./pages/NavBar";
+import NavBar from './pages/NavBar';
 
 //hooks
-import AudioProvider from "./hooks/AudioHook";
-import UserHook from "./hooks/UserHook";
-import Loading from "./components/Loading";
+import AudioProvider from './hooks/AudioHook';
+import UserHook from './hooks/UserHook';
+import Loading from './components/Loading';
 
 //pages
-const Home = React.lazy(() => import("./pages/Home"));
-const Singer = React.lazy(() => import("./pages/Singer"));
-const SingerItem = React.lazy(() => import("./pages/Singer/SingerItem"));
-const MvContent = React.lazy(() => import("./pages/MvLatest/MvContent"));
-const Album = React.lazy(() => import("./pages/Album"));
-const MvLatest = React.lazy(() => import("./pages/MvLatest"));
-const HotSinger = React.lazy(() => import("./pages/HotSinger"));
-const NewSongs = React.lazy(() => import("./pages/NewSongs"));
-const RecommenedSongs = React.lazy(() => import("./pages/RecommenedSongs"));
-const RecommendDetail = React.lazy(() => import("./pages/RecommenedSongs/RecommendDetail"));
-const Search = React.lazy(() => import("./pages/Search"));
-const MyMusic = React.lazy(() => import("./pages/MyMusic"));
-const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
+const Home = React.lazy(() => import('./pages/Home'));
+const Singer = React.lazy(() => import('./pages/Singer'));
+const SingerItem = React.lazy(() => import('./pages/Singer/SingerItem'));
+const MvContent = React.lazy(() => import('./pages/MvLatest/MvContent'));
+const Album = React.lazy(() => import('./pages/Album'));
+const MvLatest = React.lazy(() => import('./pages/MvLatest'));
+const HotSinger = React.lazy(() => import('./pages/HotSinger'));
+const NewSongs = React.lazy(() => import('./pages/NewSongs'));
+const RecommenedSongs = React.lazy(() => import('./pages/RecommenedSongs'));
+const RecommendDetail = React.lazy(() => import('./pages/RecommenedSongs/RecommendDetail'));
+const Search = React.lazy(() => import('./pages/Search'));
+const MyMusic = React.lazy(() => import('./pages/MyMusic'));
+const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 
 //main
 function AppWrapper() {
@@ -59,7 +59,7 @@ const Suspense = ({ children }) => {
 const App = () => {
     const routers = useRoutes([
         {
-            path: "/",
+            path: '/',
             element: (
                 <Suspense>
                     <NavBar />
@@ -76,7 +76,7 @@ const App = () => {
                 },
                 {
                     //搜尋頁面
-                    path: "search/:keywords",
+                    path: 'search/:keywords',
                     element: (
                         <Suspense>
                             <Search />
@@ -85,7 +85,7 @@ const App = () => {
                 },
                 {
                     //所有歌手頁面
-                    path: "singer",
+                    path: 'singer',
                     element: (
                         <Suspense>
                             <Singer />
@@ -94,7 +94,7 @@ const App = () => {
                 },
                 {
                     //歌手頁面
-                    path: "singer/:singerId",
+                    path: 'singer/:singerId',
                     element: (
                         <Suspense>
                             <SingerItem />
@@ -103,7 +103,7 @@ const App = () => {
                 },
                 {
                     //ＭＶ
-                    path: "mvPlayer/:mvId",
+                    path: 'mvPlayer/:mvId',
                     element: (
                         <Suspense>
                             <MvContent />
@@ -112,7 +112,7 @@ const App = () => {
                 },
                 {
                     //歌手專輯頁面
-                    path: "album/:albumId",
+                    path: 'album/:albumId',
                     element: (
                         <Suspense>
                             <Album />
@@ -121,7 +121,7 @@ const App = () => {
                 },
                 {
                     //熱門排行
-                    path: "hotSinger",
+                    path: 'hotSinger',
                     element: (
                         <Suspense>
                             <HotSinger />
@@ -130,7 +130,7 @@ const App = () => {
                 },
                 {
                     //熱門ＭＶ
-                    path: "hotMv",
+                    path: 'hotMv',
                     element: (
                         <Suspense>
                             <MvLatest />
@@ -139,7 +139,7 @@ const App = () => {
                 },
                 {
                     //最新音樂
-                    path: "newSong",
+                    path: 'newSong',
                     element: (
                         <Suspense>
                             <NewSongs />
@@ -148,7 +148,7 @@ const App = () => {
                 },
                 {
                     //推薦音樂
-                    path: "recommenedSongs",
+                    path: 'recommenedSongs',
                     element: (
                         <Suspense>
                             <RecommenedSongs />
@@ -156,7 +156,7 @@ const App = () => {
                     ),
                 },
                 {
-                    path: "recommenedSongs/:recommenedId",
+                    path: 'recommenedSongs/:recommenedId',
                     element: (
                         <Suspense>
                             <RecommendDetail />
@@ -164,7 +164,7 @@ const App = () => {
                     ),
                 },
                 {
-                    path: "myMusic",
+                    path: 'myMusic',
                     element: (
                         <Suspense>
                             <MyMusic />
@@ -174,7 +174,7 @@ const App = () => {
             ],
         },
         {
-            path: "*",
+            path: '*',
             element: (
                 <Suspense>
                     <NotFoundPage />

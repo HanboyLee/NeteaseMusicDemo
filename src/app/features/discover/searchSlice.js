@@ -1,8 +1,8 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { urlPath } from "../../../configs/constant";
-import { apiHandle } from "../../../services/apiUtils";
+import { createSlice, current } from '@reduxjs/toolkit';
+import { urlPath } from '../../../configs/constant';
+import { apiHandle } from '../../../services/apiUtils';
 const initialState = {
-    currentPane: "songData",
+    currentPane: 'songData',
     loading: false,
     total: 0,
     songData: {
@@ -21,18 +21,18 @@ const initialState = {
     navBar: [
         {
             id: 1,
-            name: "歌曲",
-            container: "songData",
+            name: '歌曲',
+            container: 'songData',
         },
         {
             id: 1000,
-            name: "歌单",
-            container: "songListData",
+            name: '歌单',
+            container: 'songListData',
         },
         {
             id: 1004,
-            name: "MV",
-            container: "mvData",
+            name: 'MV',
+            container: 'mvData',
         },
     ],
     queryInfo: {
@@ -43,12 +43,12 @@ const initialState = {
 };
 
 export const searchSlice = createSlice({
-    name: "search",
+    name: 'search',
     initialState,
     reducers: {
         searchByAmount(state, action) {
             const { container } = current(state.navBar).find((item) => item.id === action.payload.containerType);
-
+            console.log(action.payload.datas);
             return {
                 ...state,
                 [container]: action.payload.datas,
@@ -91,7 +91,7 @@ export const getSearch =
             const { result } = await apiHandle({ url: urlPath.SEARCH, params });
             const map = {};
             for (const key in result) {
-                if (typeof result[key] === "number") {
+                if (typeof result[key] === 'number') {
                     map.total = result[key];
                 }
                 if (Array.isArray(result[key])) {
@@ -100,7 +100,7 @@ export const getSearch =
             }
             dispatch(searchByAmount({ datas: map, containerType: params.type }));
         } catch (error) {
-            console.log(error, "getSearch");
+            console.log(error, 'getSearch');
         }
     };
 

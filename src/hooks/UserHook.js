@@ -1,27 +1,27 @@
-import { message } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { authSignup, getCountrieCode, setHasVerify } from "../app/features/login/loginSlice";
-import { getStorge } from "../services/storgeHelper";
+import { message } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { authSignup, getCountrieCode, setHasVerify } from '../app/features/login/loginSlice';
+import { getStorge } from '../services/storgeHelper';
 
 const Context = React.createContext();
 
 const UserHook = ({ children }) => {
     const dispatch = useDispatch();
-    const [userPhone, setUserPhone] = React.useState("");
+    const [userPhone, setUserPhone] = React.useState('');
     const [show, setShow] = React.useState(null);
     const [authCode, setAuthCode] = React.useState(null);
     const [switcher, setSwitcher] = React.useState(0);
-    const [ctcode, setCtcode] = React.useState("86");
-    const [userPwd, setUserPwd] = React.useState("");
-    const [nickname, setNickname] = React.useState("");
+    const [ctcode, setCtcode] = React.useState('86');
+    const [userPwd, setUserPwd] = React.useState('');
+    const [nickname, setNickname] = React.useState('');
     const { userInfo } = useSelector((state) => state.login);
     //密碼輸入錯誤也會登入
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const isLogin = React.useMemo(() => getStorge({ key: "loginType" }), [userInfo]);
+    const isLogin = React.useMemo(() => getStorge({ key: 'loginType' }), [userInfo]);
 
     React.useEffect(() => {
         dispatch(getCountrieCode());
@@ -92,7 +92,7 @@ export const useIsVerifyCountBackwards = (initTime = 5) => {
             clearTimeout(timer);
         };
     }, [isVerify, time, dispatch]);
-    return !!time && isVerify ? time + "s" : "";
+    return !!time && isVerify ? time + 's' : '';
 };
 
 //初始化資料
@@ -105,9 +105,9 @@ export const useInittal = () => {
     const dispatch = useDispatch();
     return () => {
         setUserPhone();
-        setCtcode("86");
+        setCtcode('86');
         setAuthCode(null);
-        setUserPwd("");
+        setUserPwd('');
         setSwitcher(0);
         dispatch(setHasVerify(false));
     };
@@ -157,7 +157,7 @@ export const withLogin = (Com) => (props) => {
     const isLogin = useIsLogin();
     React.useEffect(() => {
         if (!isLogin) {
-            navigate("/");
+            navigate('/');
         }
     }, [isLogin, navigate]);
     return <Com {...props} />;

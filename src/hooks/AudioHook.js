@@ -1,10 +1,10 @@
-import { message } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { getAllSongsIdsTransforDetails, getSong, getSongs, saveInAudioLists } from "../app/features/singer/songSlice";
-import { storageKey } from "../configs/constant";
-import { getStorge } from "../services/storgeHelper";
+import { message } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getAllSongsIdsTransforDetails, getSong, getSongs, saveInAudioLists } from '../app/features/singer/songSlice';
+import { storageKey } from '../configs/constant';
+import { getStorge } from '../services/storgeHelper';
 
 const Context = React.createContext();
 const AudioHook = ({ children }) => {
@@ -40,7 +40,7 @@ export const useOnSaveSongAllBtn = (isTooMuch) => {
     return async function (songlists) {
         try {
             if (!Array.isArray(songlists)) {
-                throw new Error("獲取歌曲錯誤");
+                throw new Error('獲取歌曲錯誤');
             }
             songlists = await Promise.resolve(isTooMuch ? getAllSongsIdsTransforDetails(songlists) : songlists);
             const ids = songlists.map((item) => item.id);
@@ -65,11 +65,11 @@ export const useOnSavePlaySong = () => {
     return function (params) {
         try {
             if (!params) {
-                throw new Error("獲取歌曲錯誤");
+                throw new Error('獲取歌曲錯誤');
             }
             //如果已經存在列表中就不添加
             if (audioLists.some((item) => item.id === params.id)) {
-                return message.warning("歌曲已存在列表中");
+                return message.warning('歌曲已存在列表中');
             }
             dispatch(getSong({ id: params.id }, params));
         } catch (error) {
