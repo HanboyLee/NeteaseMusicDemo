@@ -1,11 +1,12 @@
 import styled from '@emotion/styled/macro';
-import { Col, Pagination, Row, Empty } from 'antd';
+import { Col, Pagination, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import VideoImage from '../../components/Image/VideoImage';
 import Loading from '../../components/Loading';
-import { useIsFetchEmptyData, usePagination } from './hooks';
+import { useIsFetchEmptyData } from '../../hooks/CommonHooks';
+import { usePagination } from './hooks';
 
 const MvPane = () => {
     const { loading, mvData } = useSelector((state) => state.search);

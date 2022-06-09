@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { message } from "antd";
+import { createSlice } from '@reduxjs/toolkit';
+import { message } from 'antd';
 
-import { urlPath } from "../../../configs/constant";
-import { apiHandle } from "../../../services/apiUtils";
+import { urlPath } from '../../../configs/constant';
+import { apiHandle } from '../../../services/apiUtils';
 const initialState = {
     loading: true,
     listLoading: true,
@@ -12,25 +12,25 @@ const initialState = {
     //過濾器導覽
     tagbar: [],
     hotTagbar: [
-        "全部",
-        "粤语",
-        "ACG",
-        "华语",
-        "流行",
-        "欧美",
-        "说唱",
-        "摇滚",
-        "民谣",
-        "电子",
-        "轻音乐",
-        "影视原声",
-        "怀旧",
+        '全部',
+        '粤语',
+        'ACG',
+        '华语',
+        '流行',
+        '欧美',
+        '说唱',
+        '摇滚',
+        '民谣',
+        '电子',
+        '轻音乐',
+        '影视原声',
+        '怀旧',
     ],
     //列表
     recommendList: [],
     total: 0,
     queryInfo: {
-        cat: "全部",
+        cat: '全部',
         limit: 18,
         num: 1,
     },
@@ -40,7 +40,7 @@ const initialState = {
 };
 
 export const recommendSongSlice = createSlice({
-    name: "recommendSong",
+    name: 'recommendSong',
     initialState,
     reducers: {
         recommendSongTagByAmount(state, action) {
@@ -83,6 +83,7 @@ export const recommendSongSlice = createSlice({
             };
         },
         onClickCat(state, action) {
+            console.log('action', action);
             return {
                 ...state,
                 queryInfo: {
@@ -150,7 +151,7 @@ export const getRecommendTags =
             }
             dispatch(recommendSongTagByAmount(navBar));
         } catch (error) {
-            console.log(error, "getRecommendTags");
+            console.log(error, 'getRecommendTags');
         }
     };
 

@@ -1,14 +1,14 @@
-import { CaretDownOutlined } from "@ant-design/icons";
-import styled from "@emotion/styled/macro";
-import { Divider, Pagination, Drawer, Button, Typography } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { getRecommendTags, onClickCat, onCurrentChange } from "../../app/features/lasterList/recommendSongSlice";
-import Loading from "../../components/Loading";
-import Option from "../../components/Option";
+import { CaretDownOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled/macro';
+import { Divider, Pagination, Drawer, Button, Typography, Empty } from 'antd';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getRecommendTags, onClickCat, onCurrentChange } from '../../app/features/lasterList/recommendSongSlice';
+import Loading from '../../components/Loading';
+import Option from '../../components/Option';
 
-import Lists from "./Lists";
+import Lists from './Lists';
 
 const RecommenedSongs = () => {
     const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -23,6 +23,12 @@ const RecommenedSongs = () => {
     const onChange = (current) => {
         dispatch(onCurrentChange(current));
     };
+    const onClose = () => setOpenDrawer(false);
+    const onTapCat = (selected) => {
+        onClose();
+        return onClickCat(selected);
+    };
+
     if (loading) {
         return <Loading />;
     }
@@ -39,20 +45,20 @@ const RecommenedSongs = () => {
                     </Button>
                 </Tags>
 
-                <Option data={hotTagbar} category={queryInfo.cat} onClick={onClickCat} />
+                <Option data={hotTagbar} category={queryInfo.cat} onClick={onTapCat} />
             </TagsWrap>
             <Drawer
                 title="全部歌单标签"
-                placement={"top"}
+                placement={'top'}
                 closable={false}
-                onClose={() => setOpenDrawer(false)}
+                onClose={onClose}
                 visible={openDrawer}
                 keyboard
                 contentWrapperStyle={{
-                    height: "35%",
-                    boxShadow: "8px 6px 10px",
-                    overflow: "hidden",
-                    borderRadius: "0 0 5px 5px",
+                    height: 'auto',
+                    boxShadow: '8px 6px 10px',
+                    overflow: 'hidden',
+                    borderRadius: '0 0 5px 5px',
                 }}
             >
                 {tagbar.map((item) => {
@@ -62,22 +68,26 @@ const RecommenedSongs = () => {
                             title={item.name}
                             data={item.tags}
                             category={queryInfo.cat}
-                            onClick={onClickCat}
+                            onClick={onTapCat}
                         />
                     );
                 })}
             </Drawer>
             <Divider />
             <Lists queryInfo={queryInfo} />
-            <PaginationWrap>
-                <Pagination
-                    showLessItems
-                    onChange={onChange}
-                    current={queryInfo.num}
-                    total={total}
-                    showSizeChanger={false}
-                />
-            </PaginationWrap>
+            {total ? (
+                <PaginationWrap>
+                    <Pagination
+                        showLessItems
+                        onChange={onChange}
+                        current={queryInfo.num}
+                        total={total}
+                        showSizeChanger={false}
+                    />
+                </PaginationWrap>
+            ) : (
+                <Empty />
+            )}
         </Container>
     );
 };

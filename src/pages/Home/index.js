@@ -1,19 +1,19 @@
-import styled from "@emotion/styled/macro";
-import React from "react";
+import styled from '@emotion/styled/macro';
+import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
-import { getPersonalizedList } from "../../app/features/discover/personalizedSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { getPersonalizedList } from '../../app/features/discover/personalizedSlice';
 
-import Img from "../../components/Image/Img";
-import { Col, Row, Typography } from "antd";
-import { themeConstant } from "../../configs/constant";
-import Banner from "./Banner";
-import ImageCard from "../../components/Image/ImageCard";
-import { RightOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { useOnSavePlaySong } from "../../hooks/AudioHook";
-import VideoImage from "../../components/Image/VideoImage";
-import Loading from "../../components/Loading";
+import Img from '../../components/Image/Img';
+import { Col, Row, Typography } from 'antd';
+import { themeConstant } from '../../configs/constant';
+import Banner from './Banner';
+import ImageCard from '../../components/Image/ImageCard';
+import { RightOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { useOnSavePlaySong } from '../../hooks/AudioHook';
+import VideoImage from '../../components/Image/VideoImage';
+import Loading from '../../components/Loading';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -36,8 +36,8 @@ const Home = () => {
             <Banner bannerList={bannerList} />
             {/* 推荐歌单 */}
             <CommenContent>
-                <LinkTitleWrap to={"/recommenedSongs"}>
-                    <Typography.Title level={5} className={"title"}>
+                <LinkTitleWrap to={'/recommenedSongs'}>
+                    <Typography.Title level={5} className={'title'}>
                         推荐歌单
                         <RightOutlined />
                     </Typography.Title>
@@ -46,8 +46,8 @@ const Home = () => {
                     {/* title */}
                     {personalized?.map((item) => {
                         return (
-                            <Col key={item?.id} md={6}>
-                                <ImageCard navigateTo={"recommenedSongs/"} {...item} />
+                            <Col key={item?.id} md={4}>
+                                <ImageCard navigateTo={'recommenedSongs/'} {...item} />
                             </Col>
                         );
                     })}
@@ -55,8 +55,8 @@ const Home = () => {
             </CommenContent>
             {/* 獨家放送 */}
             <CommenContent>
-                <LinkTitleWrap to={"/recommenedSongs"}>
-                    <Typography.Title level={5} className={"title"}>
+                <LinkTitleWrap to={'/recommenedSongs'}>
+                    <Typography.Title level={5} className={'title'}>
                         {privatecontent?.name}
                         <RightOutlined />
                     </Typography.Title>
@@ -66,7 +66,7 @@ const Home = () => {
                     {privatecontent?.result?.map((item) => {
                         return (
                             <Col key={item.id} md={8}>
-                                <ImageCard navigateTo={"recommenedSongs/"} {...item} />
+                                <ImageCard navigateTo={'recommenedSongs/'} {...item} />
                             </Col>
                         );
                     })}
@@ -74,8 +74,8 @@ const Home = () => {
             </CommenContent>
             {/* 最新音乐 */}
             <CommenContent>
-                <LinkTitleWrap to={"/newSong"} replace={true}>
-                    <Typography.Title level={5} className={"title"}>
+                <LinkTitleWrap to={'/newSong'} replace={true}>
+                    <Typography.Title level={5} className={'title'}>
                         最新音乐
                         <RightOutlined />
                     </Typography.Title>
@@ -83,7 +83,7 @@ const Home = () => {
                 <Row gutter={[30, 20]}>
                     {newsong?.map((item) => {
                         return (
-                            <Col key={item?.id} md={8} onClick={() => onSavePlaySong(item)}>
+                            <Col key={item?.id} md={6} onClick={() => onSavePlaySong(item)}>
                                 <SongsWrap>
                                     <div className="imgWrap">
                                         <Img src={item?.picUrl} />
@@ -100,8 +100,8 @@ const Home = () => {
             </CommenContent>
             {/* 最新热门MV推荐 */}
             <CommenContent>
-                <LinkTitleWrap to={"/hotMv"} replace={true}>
-                    <Typography.Title level={5} className={"title"}>
+                <LinkTitleWrap to={'/hotMv'} replace={true}>
+                    <Typography.Title level={5} className={'title'}>
                         最新热门MV推荐
                         <RightOutlined />
                     </Typography.Title>

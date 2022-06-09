@@ -1,30 +1,28 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import { storageKey, urlPath } from "../../../configs/constant";
-import { apiHandle } from "../../../services/apiUtils";
-import { setStorge } from "../../../services/storgeHelper";
+import { createSlice } from '@reduxjs/toolkit';
+import { urlPath } from '../../../configs/constant';
+import { apiHandle } from '../../../services/apiUtils';
 const initialState = {
     loading: true,
     //過濾器導覽
     TarBarArea: [
         {
-            name: "全部",
+            name: '全部',
             id: 0,
         },
         {
-            name: "华语",
+            name: '华语',
             id: 7,
         },
         {
-            name: "欧美",
+            name: '欧美',
             id: 96,
         },
         {
-            name: "日本",
+            name: '日本',
             id: 8,
         },
         {
-            name: "韩国",
+            name: '韩国',
             id: 16,
         },
     ],
@@ -36,7 +34,7 @@ const initialState = {
 };
 
 export const newSongsSlice = createSlice({
-    name: "newSongs",
+    name: 'newSongs',
     initialState,
     reducers: {
         initNewSongsByAmount(state, action) {
@@ -71,7 +69,7 @@ export const getNewSongsList =
             const { data } = await apiHandle({ url: urlPath.NEW_SONGS, params });
             dispatch(initNewSongsByAmount(data));
         } catch (error) {
-            console.log(error, "getNewSongsList");
+            console.log(error, 'getNewSongsList');
         }
     };
 

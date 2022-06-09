@@ -1,14 +1,14 @@
-import axios from "axios";
-import { API_URL, API_TIMEOUT } from "../configs/config";
-import nprogress from "nprogress";
-import { message } from "antd";
+import axios from 'axios';
+import { API_URL, API_TIMEOUT } from '../configs/config';
+import nprogress from 'nprogress';
+import { message } from 'antd';
 
 const instace = function () {
     const createInstance = axios.create({
         withCredentials: true,
         url: API_URL,
         timeout: API_TIMEOUT,
-        responseType: "json",
+        responseType: 'json',
         params: {
             // realIP: "211.161.244.70",
             // realIP: "116.25.146.177",
@@ -23,14 +23,14 @@ const instace = function () {
 //Response
 const handleResponse = (res) => {
     try {
-        console.log(res, "handleResponse", 23);
+        // console.log(res, "handleResponse", 23);
         if (res.data.code !== 200) {
             throw new Error(res?.data?.message);
         }
         nprogress.done();
         return res.data;
     } catch (error) {
-        message.error(error.message || "加載資料失敗", 2);
+        message.error(error.message || '加載資料失敗', 2);
         nprogress.done();
     }
 };

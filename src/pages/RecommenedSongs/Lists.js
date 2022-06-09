@@ -1,10 +1,10 @@
-import styled from "@emotion/styled/macro";
-import { Col, Row } from "antd";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getRecommendList } from "../../app/features/lasterList/recommendSongSlice";
-import ImageCard from "../../components/Image/ImageCard";
-import Loading from "../../components/Loading";
+import styled from '@emotion/styled/macro';
+import { Col, Row } from 'antd';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRecommendList } from '../../app/features/lasterList/recommendSongSlice';
+import ImageCard from '../../components/Image/ImageCard';
+import Loading from '../../components/Loading';
 
 const Lists = ({ queryInfo }) => {
     const { listLoading, recommendList } = useSelector((state) => state.recommendSong);
@@ -25,7 +25,7 @@ const Lists = ({ queryInfo }) => {
                     return (
                         <ImageWrap md={4} key={item.id}>
                             <ImageCard
-                                navigateTo={"recommenedSongs/"}
+                                navigateTo={'recommenedSongs/'}
                                 id={item.id}
                                 picUrl={item.coverImgUrl}
                                 name={item.name}

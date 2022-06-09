@@ -4,7 +4,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ImageCard from '../../components/Image/ImageCard';
 import Loading from '../../components/Loading';
-import { useIsFetchEmptyData, usePagination } from './hooks';
+import { useIsFetchEmptyData } from '../../hooks/CommonHooks';
+import { usePagination } from './hooks';
 
 const SongListPane = () => {
     const { songListData, loading } = useSelector((state) => state.search);
